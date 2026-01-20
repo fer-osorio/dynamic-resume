@@ -1,0 +1,150 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{parskip}
+
+% Hyperref setup
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black,
+	pdftitle={CV - Alexis Fernando Osorio Sarabio - Security Engineer},
+	pdfauthor={Alexis Fernando Osorio Sarabio}
+}
+
+% Section formatting
+\titleformat{\section}
+	{\Large\bfseries}
+	{}
+	{0em}
+	{}
+	[\titlerule]
+
+\titleformat{\subsection}
+	{\large\bfseries}
+	{}
+	{0em}
+	{}
+
+% Remove page numbers
+\pagestyle{empty}
+
+% Adjust spacing
+\setlength{\parindent}{0pt}
+\setlist{nosep, leftmargin=1.5em}
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+
+\begin{document}
+
+% Header
+\begin{center}
+	{\LARGE \textbf{Alexis Fernando Osorio Sarabio}} \hfill	Mexico City, Mexico
+	
+	\textbf{Contact:} \hfill +52 95 4128 6658 $|$ \href{mailto:alexis.fernando.osorio.sarabio@gmail.com}{alexis.fernando.osorio.sarabio@gmail.com} \\%[0.2em]
+	\textbf{Web Page:} \hfill  \href{https://fer-osorio.github.io/mathematical-foundations}{fer-osorio.github.io/mathematical-foundations} \\
+	\textbf{GitHub:} \hfill \href{https://github.com/fer-osorio}{github.com/fer-osorio} \\
+	\textbf{LinkedIn:} \hfill \href{https://www.linkedin.com/in/alexis-fernando-osorio-sarabio-0b755b346}{linkedin.com/in/alexis-fernando-osorio-sarabio-0b755b346}
+\end{center}
+
+\section{Professional Summary}
+
+Security engineer specializing in cryptographic implementations and post-quantum cryptography with practical experience building production-grade encryption systems. Proven experience in implementing NIST-compliant AES encryption libraries, developing quantum-resistant key exchange protocols (NTRU), and optimizing cryptographic performance. Strong foundation in secure software development, cryptanalysis, and security testing procedures. Seeking to apply cryptographic expertise and systems programming skills to design and build resilient security software infrastructure.
+
+\section{Technical Skills}
+
+\begin{itemize}
+	\item \textbf{Cryptography \& Security:} Post-Quantum Cryptography (NTRU, Lattice-based), AES Encryption, Block Cipher Modes (CBC, CTR, ECB, OFB), Key Encapsulation Mechanisms (KEM), Digital Signatures, Secure Key Exchange, Cryptographic Randomness Testing.
+	\item \textbf{Programming Languages:} C/C++ (Advanced), Python, Java, Bash Scripting.
+	\item \textbf{Cryptographic Libraries \& Tools:} GNU Multiple Precision Arithmetic Library (GMP), OpenSSL, NIST Test Vectors (FIPS 197, SP 800-38A, FIPS 180-4), Statistical Test Suites (Chi-Square, Correlation, Entropy).
+	\item \textbf{Development \& Testing:} Git, Makefile, Performance Benchmarking, Automated Testing Frameworks, Debugging Tools (GDB, Valgrind).
+	\item \textbf{Systems \& Platforms:} Linux, Command Line Applications, File Format Handling (Binary, Bitmap, Text), Memory Management, Low-level Optimization.
+	\item \textbf{Documentation \& Collaboration:} LaTeX, Conference Presentation, NIST Standards Compliance.
+	\item \textbf{Languages:} Spanish (Native), English (Full Professional Proficiency), German (Basic).
+\end{itemize}
+
+\section{Professional Experience}
+
+\textbf{Research Assistant (Cryptography \& Security)} $|$ Instituto Politécnico Nacional, Mexico City $|$ January 2023 -- July 2025
+
+\begin{itemize}
+	\item Led development of cryptographic software for post-quantum cryptography research, implementing production-quality code in C/C++ with comprehensive testing and documentation.
+	\item Optimized AES encryption implementation achieving 2x performance improvement through low-level optimizations, significantly reducing processing time for large-scale image encryption.
+	\item Implemented SHA-512 hash algorithm with 128-bits number multiplication support for NIST FIPS 180-4 compliance.
+	\item Developed comprehensive test suites incorporating NIST standard test vectors (FIPS 197, SP 800-38A) to validate cryptographic implementation correctness and security properties.
+	\item Built automated testing frameworks and performance measurement tools for cryptographic protocol validation, including entropy analysis, chi-square tests, and correlation analysis.
+	\item Produced audiovisual materials with educational purposes, suitable for conference presentations, university lectures, and social media posts.
+	\item Presented research findings on quantum-resistant cryptography at 21+ technical seminars, communicating complex security concepts to undergraduate audiences.
+	\item \textbf{Research product: Scientific article on post-quantum cryptography and efficient implementations} (The article is still with the assigned editor for revision before publication).
+\end{itemize}
+
+\section{Key Security Projects}
+
+\subsection{Post-Quantum Key Exchange Protocol Implementation [C++, NTRU, Cryptanalysis]}
+
+\textit{
+	March 2023 -- June 2025 (Currently maintaining and upgrading) \\
+	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/NTRUencryption}{github.com/fer-osorio/NTRUencryption}
+}
+
+\begin{itemize}
+	\item Implemented a quantum-resistant Key Encapsulation Mechanism (KEM) using NTRU lattice-based cryptography, designed to withstand attacks from both classical and quantum attacks.
+	\item Designed performance optimization on polynomial operations by using ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ for key generation, encryption, and decryption.
+	\item Developed comprehensive security validation framework including entropy analysis, chi-square statistical tests, and correlation analysis to verify cryptographic randomness.
+	\item Built modular architecture with dedicated subsystems for performance profiling, security testing, and debugging utilities supporting multiple output formats (binary, hexadecimal, ASCII).
+\end{itemize}
+
+\subsection{AES Encryption Library [C/C++, NIST Standards, Security Testing]}
+\textit{
+	January 2024 -- June 2025 (Currently maintaining and upgrading) \\
+	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/AESencryption}{github.com/fer-osorio/AESencryption}
+}
+
+\begin{itemize}
+	\item Designed and developed NIST FIPS 197-compliant AES encryption library supporting multiple block cipher modes of operation for versatile data protection scenarios.
+	\item Implemented comprehensive testing framework validating 100\% compliance with NIST test vectors from FIPS 197 and SP 800-38A standards.
+	\item Built metrics analysis module measuring encryption quality through randomness analysis.
+	\item Developed multi-format file handler supporting bitmap images, binary data, and text files with secure memory handling to prevent information leakage.
+	\item Created CLI interface with features including key input, output, and operational mode selection.
+\end{itemize}
+
+\subsection{Secure Communication Protocol [Cryptographic Protocols, System Architecture]}
+\textit{
+	August 2023 -- July 2025. \\
+	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/Tesis-maestria-MTC}{github.com/fer-osorio/Tesis-maestria-MTC}
+}
+
+\begin{itemize}
+	\item Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components for Master's thesis research.
+	\item Incorporated mathematical foundations that support both the functionality and security of the design.
+	\item Documented protocol specification, security proofs, and implementation guidelines following academic and industry standards.
+\end{itemize}
+
+%\section{Additional Projects}
+
+%\textbf{Expression Plotter with Custom Parser} [C++, Compiler Design] -- Built mathematical expression evaluator with hand-written lexical analyzer, parser, and syntax analyzer. \textit{GitHub: \href{https://github.com/fer-osorio/Plotter}{github.com/fer-osorio/Plotter}}
+
+%\textbf{Deterministic Finite Automaton Engine} [C++, Formal Languages] -- Implemented DFA simulator with runtime string validation using transition table configurations. \textit{GitHub: \href{https://github.com/fer-osorio/DFA}{github.com/fer-osorio/DFA}}
+
+\section{Conference Presentations}
+
+\begin{itemize}
+	\item \textit{``Sistema de cifrado asimétrico resistente a ataques de computadoras cuánticas''}, \textbf{Congreso Internacional CAECH}, CAECH \& THINSCEN, Mexico City, Mexico, October 2024.
+	\item \textit{``Sistema de cifrado asimétrico resistente a ataques de computadoras cuánticas''}, \textbf{Congreso Interpolitécnico de Investigación para Alumnos de Posgrado}, IPN, Mexico City, Mexico, June 2024.
+\end{itemize}
+
+\section{Education}
+
+\textbf{M.S. in Computer Science} $|$ Centro de Innovación y Desarrollo Tecnológico en Cómputo, Instituto Politécnico Nacional, Mexico City $|$ Start: January 2023. End: July 2025\\
+\textit{Specialization: Cryptography \& Secure Systems}
+
+\textbf{B.S. in Physics and Mathematics} $|$ Escuela Superior de Física y Matemáticas, Instituto Politécnico Nacional, Mexico City $|$ Start: August 2017. End: July 2022\\
+\textit{Specialization: Applied Mathematics}
+
+\end{document}
