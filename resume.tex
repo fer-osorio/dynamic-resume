@@ -1,6 +1,36 @@
 \documentclass[11pt,a4paper]{article}
 
-% Packages
+% =============================================================================
+% VERSION CONTROL SYSTEM
+% =============================================================================
+% This section implements conditional compilation for different resume versions.
+% 
+% Design Decisions:
+%   Using \newif conditionals for clarity and simplicity
+% =============================================================================
+
+% Uncomment for manual testing during development:
+% \securityengineertrue\softwareengineerfalse   % Security Engineer
+% \securityengineerfalse\softwareengineertrue   % Software Engineer (Security)
+
+% =============================================================================
+% VERSION-SPECIFIC COMMANDS
+% =============================================================================
+% These macros wrap content that should only appear in specific versions.
+% Usage:
+%   \securityonly{...} - content only for Security Engineer version
+%   \softwareonly{...} - content only for Software Engineer version
+%   \bothversions{...} - content for both versions (explicit for clarity)
+% =============================================================================
+
+\newcommand{\securityonly}[1]{\ifsecurityengineer#1\fi}
+\newcommand{\softwareonly}[1]{\ifsoftwareengineer#1\fi}
+\newcommand{\bothversions}[1]{#1}
+
+% =============================================================================
+% Packages (unchanged from original)
+% =============================================================================
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[margin=0.65in]{geometry}
@@ -43,51 +73,125 @@
 
 \begin{document}
 
-% Header
+% =============================================================================
+% HEADER (Version-specific title)
+% =============================================================================
+% Design Decision: Different titles help recruiters immediately identify
+% which version they're looking at. The rest of the contact info remains the same.
+% =============================================================================
+
 \begin{center}
-	{\LARGE \textbf{Alexis Fernando Osorio Sarabio}} \hfill	Mexico City, Mexico
+	% Version-specific title
+	\ifsecurityengineer
+		{\LARGE \textbf{Alexis Fernando Osorio Sarabio}} \hfill Security Engineer (Cryptography Focus) \\
+	\fi
+	\ifsoftwareengineer
+		{\LARGE \textbf{Alexis Fernando Osorio Sarabio}} \hfill Software Engineer (Security Focus) \\
+	\fi
 	
-	\textbf{Contact:} \hfill +52 95 4128 6658 $|$ \href{mailto:alexis.fernando.osorio.sarabio@gmail.com}{alexis.fernando.osorio.sarabio@gmail.com} \\%[0.2em]
+	% Contact information (same for both versions)
+	\textbf{Adress:} \hfill Mexico City, Mexico \\
+	\textbf{Contact:} \hfill +52 95 4128 6658 $|$ \href{mailto:alexis.fernando.osorio.sarabio@gmail.com}{alexis.fernando.osorio.sarabio@gmail.com} \\
 	\textbf{Portfolio \& Tools:} \hfill \href{https://fer-osorio.github.io/mathematical-foundations}{fer-osorio.github.io/mathematical-foundations} \\
 	\textbf{GitHub:} \hfill \href{https://github.com/fer-osorio}{github.com/fer-osorio} \\
 	\textbf{LinkedIn:} \hfill \href{https://www.linkedin.com/in/alexis-fernando-osorio-sarabio-0b755b346}{linkedin.com/in/alexis-fernando-osorio-sarabio-0b755b346}
 \end{center}
 
+% =============================================================================
+% PROFESSIONAL SUMMARY
+% =============================================================================
+% Design Decision: Different emphases for each role while maintaining
+% the core identity as a mathematician/computer scientist with crypto expertise.
+% =============================================================================
+
 \section{Professional Summary}
 
-Mathematician and computer scientist specializing in cryptographic implementations and post-quantum cryptography with practical experience building production-grade encryption systems. Proven experience in implementing NIST-compliant AES encryption libraries, developing quantum-resistant key exchange protocols (NTRU), and optimizing cryptographic performance. Strong foundation in secure software development, cryptanalysis, and security testing procedures. Develop educational web tools and maintain a public portfolio to demonstrate cryptographic concepts and share research outcomes. Seeking to apply cryptographic expertise and systems programming skills to design and build resilient security software infrastructure.
+Mathematician and computer scientist specializing in cryptographic implementations and post-quantum cryptography with practical experience building production-grade encryption systems. \securityonly{Proven experience in implementing NIST-compliant AES encryption libraries, developing quantum-resistant key exchange protocols (NTRU), and optimizing cryptographic performance. Strong foundation in secure software development, cryptanalysis, and security testing procedures.\!}\softwareonly{\!Skilled in developing secure software systems with focus on robust architecture, performance optimization, and comprehensive testing frameworks. Experienced in building production-grade cryptographic libraries and implementing security protocols with clean, maintainable code.\!} Develop educational web tools and maintain a public portfolio to demonstrate cryptographic concepts and share research outcomes. \securityonly{Seeking to apply cryptographic expertise and security engineering skills to design and build resilient security infrastructure and defensive systems.}\softwareonly{\!Seeking to apply security-focused software engineering skills to develop high-performance, secure systems with strong cryptographic foundations and scalable architecture.}
+
+% =============================================================================
+% TECHNICAL SKILLS
+% =============================================================================
+% Design Decision: 
+% 1. Core crypto skills appear in both versions (essential for both roles)
+% 2. Different secondary skill categories for each role
+% 3. Programming languages same for both (though emphasis might differ)
+% =============================================================================
 
 \section{Technical Skills}
 
 \begin{itemize}
-	\item \textbf{Cryptography \& Security:} Post-Quantum Cryptography (NTRU, Lattice-based), AES Encryption, Block Cipher Modes (CBC, CTR, ECB, OFB), Key Encapsulation Mechanisms (KEM), Digital Signatures, Secure Key Exchange, Cryptographic Randomness Testing.
+	\item \textbf{Cryptography \& Security:} Post-Quantum Cryptography (NTRU, Lattice-based), Key Encapsulation Mechanisms (KEM), RSA, Elliptic Curve Cryptography (ECC), AES Encryption, Block Cipher Modes (CBC, CTR, ECB, OFB), Digital Signatures, Secure Key Exchange, Cryptoanalysis.
+	
+	% Security-specific skills
+	\securityonly{\item \textbf{Security Engineering:} Cryptographic Protocol Design, Security Testing \& Validation, NIST Standards Compliance (FIPS 197, SP 800-38A), Security Architecture, Threat Modeling.}
+	
+	% Software Engineering skills
+	\softwareonly{\item \textbf{Software Engineering:} System Architecture, Design Patterns, Performance Optimization, Automated Testing Frameworks, CI/CD Pipelines, Code Review Processes, Software Development Lifecycle.}
+	
 	\item \textbf{Programming Languages:} C/C++ (Advanced), Python, Java, Bash Scripting, HTML/CSS, JavaScript (for cryptographic visualizations).
-	\item \textbf{Cryptographic Libraries \& Tools:} GNU Multiple Precision Arithmetic Library (GMP), OpenSSL, Web Cryptography API, NIST Test Vectors (FIPS 197, SP 800-38A, FIPS 180-4), Statistical Test Suites (Chi-Square, Correlation, Entropy).
-	\item \textbf{Development \& Testing:} Git, Makefile, Performance Benchmarking, Automated Testing Frameworks, Debugging Tools (GDB, Valgrind).
+	
+	% Development tools with different emphasis
+	\softwareonly{\item \textbf{Development Tools:} Git, Makefile, Docker, Debugging Tools (GDB, Valgrind), Performance Profiling, Unit Testing Frameworks, Build Systems.}
+	
+	\securityonly{\item \textbf{Security Tools \& Libraries:} OpenSSL, GNU Multiple Precision Arithmetic Library (GMP), NIST Test Vectors, Statistical Test Suites (Chi-Square, Correlation, Entropy), Cryptographic Analysis Tools.}
+	
 	\item \textbf{Systems \& Platforms:} Linux, Command Line Applications, File Format Handling (Binary, Bitmap, Text), Memory Management, Low-level Optimization.
-	\item \textbf{Documentation \& Collaboration:} LaTeX, Conference Presentation, NIST Standards Compliance.
+	
+	% Documentation skills slightly different emphasis
+	\softwareonly{\item \textbf{Documentation \& Collaboration:} Technical Documentation, API Design, Code Documentation, Agile Methodologies, Cross-functional Team Collaboration.}
+	
+	\securityonly{\item \textbf{Documentation \& Compliance:} LaTeX, NIST Standards Documentation, Security Protocol Specifications, Academic Publications, Conference Presentations.}
+	
 	\item \textbf{Languages:} Spanish (Native), English (Full Professional Proficiency), German (Basic).
 \end{itemize}
 
+% =============================================================================
+% PROFESSIONAL EXPERIENCE
+% =============================================================================
+% Design Decision: Same position title but different emphasis in bullet points.
+% Security Engineer: Focus on security validation, compliance, cryptanalysis
+% Software Engineer: Focus on architecture, testing, performance, maintainability
+% =============================================================================
 \section{Professional Experience}
 
 \textbf{Research Assistant (Cryptography \& Security)} $|$ Instituto Politécnico Nacional, Mexico City $|$ January 2023 -- July 2025
 
 \begin{itemize}
 	\item Led development of cryptographic software for post-quantum cryptography research, implementing production-quality code in C/C++ with comprehensive testing and documentation.
-	\item Optimized AES encryption implementation achieving 2x performance improvement through low-level optimizations, significantly reducing processing time for large-scale image encryption.
+	
+	% Different emphasis on the performance optimization achievement
+	\securityonly{\item Optimized AES encryption implementation achieving 2x performance improvement through low-level cryptographic optimizations and algorithm tuning, significantly reducing processing time for large-scale data encryption.}
+	
+	\softwareonly{\item Architected and optimized AES encryption library, achieving 2x performance improvement through algorithmic enhancements, efficient memory management, and cache optimization techniques.}
+	
 	\item Implemented SHA-512 hash algorithm with 128-bits number multiplication support for NIST FIPS 180-4 compliance.
-	\item Developed comprehensive test suites incorporating NIST standard test vectors (FIPS 197, SP 800-38A) to validate cryptographic implementation correctness and security properties.
-	\item Built automated testing frameworks and performance measurement tools for cryptographic protocol validation, including entropy analysis, chi-square tests, and correlation analysis.
+	
+	% Different emphasis on testing
+	\securityonly{\item Developed comprehensive security test suites incorporating NIST standard test vectors (FIPS 197, SP 800-38A) to validate cryptographic implementation correctness, security properties, and compliance with industry standards.}
+	
+	\softwareonly{\item Built automated testing frameworks and CI/CD pipelines for cryptographic protocol validation, ensuring code reliability, maintainability, and facilitating continuous integration.}
+	
+	% Additional points specific to each role
+	\securityonly{\item Conducted security analysis including entropy assessment, chi-square statistical tests, and correlation analysis to verify cryptographic randomness and identify potential vulnerabilities.}
+	
+	\softwareonly{\item Designed modular, reusable codebase with clean APIs and comprehensive documentation, enabling easy integration into larger systems and promoting code reuse.}
+	
 	\item Produced audiovisual materials with educational purposes, suitable for conference presentations, university lectures, and social media posts.
 	\item Presented research findings on quantum-resistant cryptography at 21+ technical seminars, communicating complex security concepts to undergraduate audiences.
 	\item \textbf{Research product: Scientific article on post-quantum cryptography and efficient implementations} (The article is still with the assigned editor for revision before publication).
 \end{itemize}
 
-\section{Key Security Projects}
+% =============================================================================
+% KEY SECURITY PROJECTS
+% =============================================================================
+% Design Decision: Same projects but with different emphasis in descriptions.
+% The projects themselves are relevant to both roles, but we emphasize
+% different aspects in the bullet points.
+% =============================================================================
+
+\section{Key Projects}
 
 \subsection{Post-Quantum Key Exchange Protocol Implementation [C++, NTRU, Cryptanalysis]}
-
 \textit{
 	March 2023 -- June 2025 (Currently maintaining and upgrading) \\
 	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/NTRUencryption}{github.com/fer-osorio/NTRUencryption}
@@ -95,9 +199,17 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 
 \begin{itemize}
 	\item Implemented a quantum-resistant Key Encapsulation Mechanism (KEM) using NTRU lattice-based cryptography, designed to withstand attacks from both classical and quantum attacks.
-	\item Designed performance optimization on polynomial operations by using ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ for key generation, encryption, and decryption.
-	\item Developed comprehensive security validation framework including entropy analysis, chi-square statistical tests, and correlation analysis to verify cryptographic randomness.
-	\item Built modular architecture with dedicated subsystems for performance profiling, security testing, and debugging utilities supporting multiple output formats (binary, hexadecimal, ASCII).
+	
+	% Different emphasis on optimization
+	\securityonly{\item Optimized polynomial operations using ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ while maintaining cryptographic security guarantees.}
+	
+	\softwareonly{\item Designed efficient polynomial operation algorithms leveraging ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ through algorithmic improvements and data structure optimization.}
+	
+	\securityonly{\item Developed comprehensive security validation framework including entropy analysis, chi-square statistical tests, and correlation analysis to verify cryptographic randomness and identify potential weaknesses.}
+	
+	\softwareonly{\item Built modular architecture with dedicated subsystems for performance profiling, security testing, and debugging utilities, supporting multiple output formats (binary, hexadecimal, ASCII).}
+	
+	\softwareonly{\item Created extensive test coverage with unit tests, integration tests, and performance benchmarks to ensure reliability and facilitate future maintenance.}
 \end{itemize}
 
 \subsection{AES Encryption Library [C/C++, NIST Standards, Security Testing]}
@@ -108,23 +220,36 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 
 \begin{itemize}
 	\item Designed and developed NIST FIPS 197-compliant AES encryption library supporting multiple block cipher modes of operation for versatile data protection scenarios.
-	\item Implemented comprehensive testing framework validating 100\% compliance with NIST test vectors from FIPS 197 and SP 800-38A standards.
-	\item Built metrics analysis module measuring encryption quality through randomness analysis.
-	\item Developed multi-format file handler supporting bitmap images, binary data, and text files with secure memory handling to prevent information leakage.
-	\item Created CLI interface with features including key input, output, and operational mode selection.
+	
+	\securityonly{\item Implemented comprehensive testing framework validating 100\% compliance with NIST test vectors from FIPS 197 and SP 800-38A standards, ensuring cryptographic correctness.}
+	
+	\softwareonly{\item Implemented comprehensive testing framework with 100\% NIST test vector compliance, automated test suites, and continuous integration validation.}
+	
+	\securityonly{\item Built metrics analysis module measuring encryption quality through randomness analysis.}
+	
+	\softwareonly{\item Developed multi-format file handler supporting bitmap images, binary data, and text files with secure memory handling and efficient I/O operations.}
 \end{itemize}
 
-\subsection{Secure Communication Protocol [Cryptographic Protocols, System Architecture]}
-\textit{
-	August 2023 -- July 2025. \\
-	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/Tesis-maestria-MTC}{github.com/fer-osorio/Tesis-maestria-MTC}
-}
+%\subsection{Secure Communication Protocol [Cryptographic Protocols, System Architecture]}
+%\textit{
+%	August 2023 -- July 2025. \\
+%	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/Tesis-maestria-MTC}{github.com/fer-osorio/Tesis-maestria-MTC}
+%}
 
-\begin{itemize}
-	\item Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components for Master's thesis research.
-	\item Incorporated mathematical foundations that support both the functionality and security of the design.
-	\item Documented protocol specification, security proofs, and implementation guidelines following academic and industry standards.
-\end{itemize}
+%\begin{itemize}
+%	\item Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components for Master's thesis research. \securityonly{Incorporated mathematical foundations supporting both functionality and security proofs of the protocol design.}\softwareonly{Architected modular system with clear separation of concerns between key exchange, encryption, and communication layers.}
+	
+	%\securityonly{\item Documented protocol specification, security proofs, and implementation guidelines following academic and industry security standards.}
+	
+	%\softwareonly{\item Documented system architecture, API specifications, and implementation guidelines following software engineering best practices.}
+%\end{itemize}
+
+% =============================================================================
+% EDUCATIONAL TOOLS & DEMOS (Same for both versions)
+% =============================================================================
+% Design Decision: This section is equally relevant for both roles,
+% showing practical application and teaching ability.
+% =============================================================================
 
 \section{Educational Tools \& Demos}
 
@@ -134,21 +259,33 @@ Mathematician and computer scientist specializing in cryptographic implementatio
     \hspace*{0.3pt} URL: \href{https://fer-osorio.github.io/mathematical-foundations}{fer-osorio.github.io/mathematical-foundations}
 }
 \begin{itemize}
-    \item \textbf{Platform:} Curated public-facing website to showcase cryptographic research, tools, and educational content.
+    \item \textbf{Platform:} Curated public website to showcase cryptographic research, tools, and educational content.
     \item \textbf{Interactive Demos:}
         \begin{itemize}
             \item RSA: Key generation, encryption/decryption, padding schemes.
             \item Hash Functions: Avalanche effect, collision resistance estimation, digest computation.
             \item Elliptic Curves: Point operations, ECDH key exchange, ECDSA signatures.
         \end{itemize}
-    \item \textbf{Educational Goal:} Bridge theoretical cryptography and practical implementation through step-by-step visual explanations.
+    %\item \textbf{Educational Goal:} Bridge theoretical cryptography and practical implementation through step-by-step visual explanations.
 \end{itemize}
+
+% =============================================================================
+% CONFERENCE PRESENTATIONS (Same for both versions)
+% =============================================================================
+% Design Decision: Conference presentations are valuable for both roles,
+% demonstrating communication skills and thought leadership.
+% =============================================================================
+
 \section{Conference Presentations}
 
 \begin{itemize}
 	\item \textit{``Sistema de cifrado asimétrico resistente a ataques de computadoras cuánticas''}, \textbf{Congreso Internacional CAECH}, CAECH \& THINSCEN, Mexico City, Mexico, October 2024.
 	\item \textit{``Sistema de cifrado asimétrico resistente a ataques de computadoras cuánticas''}, \textbf{Congreso Interpolitécnico de Investigación para Alumnos de Posgrado}, IPN, Mexico City, Mexico, June 2024.
 \end{itemize}
+
+% =============================================================================
+% EDUCATION (Same for both versions)
+% =============================================================================
 
 \section{Education}
 
@@ -157,5 +294,23 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 
 \textbf{B.S. in Physics and Mathematics} $|$ Escuela Superior de Física y Matemáticas, Instituto Politécnico Nacional, Mexico City $|$ Start: August 2017. End: July 2022\\
 \textit{Specialization: Applied Mathematics}
+
+% =============================================================================
+% VERSION IDENTIFIER FOOTER (Optional but helpful)
+% =============================================================================
+% Design Decision: Add a subtle footer to identify which version this is,
+% helpful for your own tracking and for recruiters who might see both.
+% =============================================================================
+
+\vfill
+\begin{center}
+	\scriptsize
+	\ifsecurityengineer
+		\textbf{Security Engineer} • Generated \today
+	\fi
+	\ifsoftwareengineer
+		\textbf{Software Engineer (Security Focus)} • Generated \today
+	\fi
+\end{center}
 
 \end{document}
