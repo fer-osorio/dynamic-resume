@@ -12,6 +12,7 @@
 % Uncomment for manual testing during development:
 % \securityengineertrue\softwareengineerfalse   % Security Engineer
 % \securityengineerfalse\softwareengineertrue   % Software Engineer (Security)
+% \ifincludethesistrue                          % Include thesis
 
 % =============================================================================
 % VERSION-SPECIFIC COMMANDS
@@ -20,15 +21,25 @@
 % Usage:
 %   \securityonly{...} - content only for Security Engineer version
 %   \softwareonly{...} - content only for Software Engineer version
-%   \bothversions{...} - content for both versions (explicit for clarity)
+%   \thesis{...} - includes thesis
 % =============================================================================
 
 \newcommand{\securityonly}[1]{\ifsecurityengineer#1\fi}
 \newcommand{\softwareonly}[1]{\ifsoftwareengineer#1\fi}
-\newcommand{\bothversions}[1]{#1}
+\newcommand{\thesis}{\ifincludethesis
+\subsection{Secure Communication Protocol [Cryptographic Protocols, System Architecture]}\textit{
+	August 2023 -- July 2025. \\
+	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/Tesis-maestria-MTC}{github.com/fer-osorio/Tesis-maestria-MTC}
+}
+\begin{itemize}
+	\item Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components for Master's thesis research.
+	%%%%% \securityonly{Incorporated mathematical foundations supporting both functionality and security proofs of the protocol design.}\softwareonly{Design modular system with clear separation of concerns between key exchange, encryption, and communication layers.}
+\end{itemize}
+\fi
+}
 
 % =============================================================================
-% Packages (unchanged from original)
+% Packages
 % =============================================================================
 
 \usepackage[utf8]{inputenc}
@@ -162,7 +173,7 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 	% Different emphasis on the performance optimization achievement
 	\securityonly{\item Optimized AES encryption implementation achieving 2x performance improvement through low-level cryptographic optimizations and algorithm tuning, significantly reducing processing time for large-scale data encryption.}
 	
-	\softwareonly{\item Architected and optimized AES encryption library, achieving 2x performance improvement through algorithmic enhancements, efficient memory management, and cache optimization techniques.}
+	\softwareonly{\item Designed and optimized AES encryption library, achieving 2x performance improvement through algorithmic enhancements, efficient memory management, and cache optimization techniques.}
 	
 	\item Implemented SHA-512 hash algorithm with 128-bits number multiplication support for NIST FIPS 180-4 compliance.
 	
@@ -203,13 +214,11 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 	% Different emphasis on optimization
 	\securityonly{\item Optimized polynomial operations using ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ while maintaining cryptographic security guarantees.}
 	
-	\softwareonly{\item Designed efficient polynomial operation algorithms leveraging ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ through algorithmic improvements and data structure optimization.}
+	\softwareonly{\item Designed efficient polynomial operation algorithms leveraging ring structure properties, reducing computational complexity from $O(n^4)$ to $O(n^2)$ through data structure improvements and algorithmic optimization.}
 	
 	\securityonly{\item Developed comprehensive security validation framework including entropy analysis, chi-square statistical tests, and correlation analysis to verify cryptographic randomness and identify potential weaknesses.}
 	
 	\softwareonly{\item Built modular architecture with dedicated subsystems for performance profiling, security testing, and debugging utilities, supporting multiple output formats (binary, hexadecimal, ASCII).}
-	
-	\softwareonly{\item Created extensive test coverage with unit tests, integration tests, and performance benchmarks to ensure reliability and facilitate future maintenance.}
 \end{itemize}
 
 \subsection{AES Encryption Library [C/C++, NIST Standards, Security Testing]}
@@ -230,19 +239,7 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 	\softwareonly{\item Developed multi-format file handler supporting bitmap images, binary data, and text files with secure memory handling and efficient I/O operations.}
 \end{itemize}
 
-%\subsection{Secure Communication Protocol [Cryptographic Protocols, System Architecture]}
-%\textit{
-%	August 2023 -- July 2025. \\
-%	\hspace*{0.3pt} GitHub: \href{https://github.com/fer-osorio/Tesis-maestria-MTC}{github.com/fer-osorio/Tesis-maestria-MTC}
-%}
-
-%\begin{itemize}
-%	\item Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components for Master's thesis research. \securityonly{Incorporated mathematical foundations supporting both functionality and security proofs of the protocol design.}\softwareonly{Architected modular system with clear separation of concerns between key exchange, encryption, and communication layers.}
-	
-	%\securityonly{\item Documented protocol specification, security proofs, and implementation guidelines following academic and industry security standards.}
-	
-	%\softwareonly{\item Documented system architecture, API specifications, and implementation guidelines following software engineering best practices.}
-%\end{itemize}
+\thesis{}
 
 % =============================================================================
 % EDUCATIONAL TOOLS & DEMOS (Same for both versions)
@@ -266,7 +263,6 @@ Mathematician and computer scientist specializing in cryptographic implementatio
             \item Hash Functions: Avalanche effect, collision resistance estimation, digest computation.
             \item Elliptic Curves: Point operations, ECDH key exchange, ECDSA signatures.
         \end{itemize}
-    %\item \textbf{Educational Goal:} Bridge theoretical cryptography and practical implementation through step-by-step visual explanations.
 \end{itemize}
 
 % =============================================================================
@@ -306,7 +302,7 @@ Mathematician and computer scientist specializing in cryptographic implementatio
 \begin{center}
 	\scriptsize
 	\ifsecurityengineer
-		\textbf{Security Engineer} • Generated \today
+		\textbf{Security Engineer (Cryptography Focus)} • Generated \today
 	\fi
 	\ifsoftwareengineer
 		\textbf{Software Engineer (Security Focus)} • Generated \today
