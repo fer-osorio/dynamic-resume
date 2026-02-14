@@ -142,6 +142,27 @@ Each role variant customizes:
 - Position has no teaching/education component
 - Pure backend/systems role with no frontend work
 
+### Pixel Lab Project (`--pixel-lab`)
+
+**Role-based defaults:**
+- **Security Engineer:** Included by default (shows PRNG testing, security metrics)
+- **Software Engineer:** Included by default (shows Python development, package design)
+- **Cryptography Engineer:** Excluded by default (prioritize C/C++ crypto projects)
+- **Applied Cryptographer:** Excluded by default (prioritize theoretical work)
+
+**Include when (or use `--pixel-lab` to override):**
+- Job requires Python programming skills
+- Position involves security testing or PRNG validation
+- Role emphasizes statistical analysis or data science
+- Company values multi-language proficiency
+- Space permits showing breadth of skills
+
+**Exclude when:**
+- Space is extremely limited (1 page requirement)
+- Position focuses exclusively on C/C++ development
+- Pure cryptographic theory role with no implementation
+- Resume already shows sufficient Python skills elsewhere
+
 ---
 
 ## Usage Examples
@@ -169,17 +190,17 @@ Each role variant customizes:
 ./compile-resume.sh --security --thesis --soft-skills
 # Output: resume-security-engineer-thesis-soft.pdf
 
-# Software engineer with soft skills only
-./compile-resume.sh --software --soft-skills
-# Output: resume-software-engineer-soft.pdf
+# Software engineer (Pixel Lab auto-included)
+./compile-resume.sh --software
+# Output: resume-software-engineer-pxl.pdf
 
 # Applied cryptographer with research-focused sections
 ./compile-resume.sh --applied --thesis --conferences
 # Output: resume-applied-cryptographer-thesis-conf.pdf
 
-# Cryptography engineer with all research sections
-./compile-resume.sh --crypto --thesis --soft-skills --conferences
-# Output: resume-cryptography-engineer-thesis-soft-conf.pdf
+# Cryptography engineer forcing Pixel Lab inclusion
+./compile-resume.sh --crypto --thesis --pixel-lab
+# Output: resume-cryptography-engineer-thesis-pxl.pdf
 ```
 
 ### Preview Before Compiling
