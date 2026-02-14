@@ -28,6 +28,7 @@ INCLUDE_THESIS=false
 INCLUDE_SOFT_SKILLS=false
 INCLUDE_EDU_TOOLS=true  # Default ON
 INCLUDE_CONFERENCES=false  # Default OFF (more research-oriented)
+INCLUDE_PIXEL_LAB=""  # Role-based default (set after role selection)
 
 PREVIEW_MODE=false
 CLEAN_ONLY=false
@@ -74,6 +75,7 @@ show_help() {
     echo -e "  ${CYAN}--thesis${NC}              Include thesis project section"
     echo -e "  ${CYAN}--soft-skills${NC}         Include professional/soft skills section"
     echo -e "  ${CYAN}--conferences${NC}         Include conference presentations section"
+    echo -e "  ${CYAN}--pixel-lab${NC}           Include Pixel Lab project (default: auto per role)"
     echo -e "  ${CYAN}--no-edu-tools${NC}        Exclude educational tools section (included by default)"
     echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
     echo -e "  ${CYAN}--clean${NC}               Clean auxiliary files and exit"
@@ -83,8 +85,8 @@ show_help() {
     echo -e "  ${GREEN}# Cryptography Engineer with thesis${NC}"
     echo -e "  ./compile-resume.sh --crypto --thesis"
     echo ""
-    echo -e "  ${GREEN}# Software Engineer with soft skills${NC}"
-    echo -e "  ./compile-resume.sh --software --soft-skills"
+    echo -e "  ${GREEN}# Software Engineer with Python project (auto-included)${NC}"
+    echo -e "  ./compile-resume.sh --software"
     echo ""
     echo -e "  ${GREEN}# Security Engineer, preview before compile${NC}"
     echo -e "  ./compile-resume.sh --security --preview"
@@ -136,6 +138,10 @@ build_output_filename() {
         filename="${filename}-conf"
     fi
 
+    if [ "$INCLUDE_PIXEL_LAB" = true ]; then
+        filename="${filename}-pxl"
+    fi
+
     echo "${filename}.pdf"
 }
 
@@ -167,6 +173,12 @@ show_preview() {
         echo -e "  Conferences:    ${GREEN}✓ INCLUDED${NC}"
     else
         echo -e "  Conferences:    ${YELLOW}✗ EXCLUDED${NC} (default)"
+    fi
+
+    if [ "$INCLUDE_PIXEL_LAB" = true ]; then
+        echo -e "  Pixel Lab:      ${GREEN}✓ INCLUDED${NC}"
+    else
+        echo -e "  Pixel Lab:      ${YELLOW}✗ EXCLUDED${NC}"
     fi
 
     if [ "$INCLUDE_EDU_TOOLS" = true ]; then
@@ -243,6 +255,9 @@ while [ $# -gt 0 ]; do
         --conferences)
             INCLUDE_CONFERENCES=true
             ;;
+        --pixel-lab)
+            INCLUDE_PIXEL_LAB="true"  # Explicit override
+            ;;
         --no-edu-tools)
             INCLUDE_EDU_TOOLS=false
             ;;
@@ -281,6 +296,18 @@ fi
 # Validate role selection
 validate_role
 
+# Set role-based defaults for Pixel Lab (if not explicitly set by user)
+if [ -z "$INCLUDE_PIXEL_LAB" ]; then
+    case "$ROLE" in
+        crypto|applied)
+            INCLUDE_PIXEL_LAB=false  # Prioritize C/C++ crypto projects
+            ;;
+        security|software)
+            INCLUDE_PIXEL_LAB=true   # Show Python skills
+            ;;
+    esac
+fi
+
 # Show preview if requested
 if [ "$PREVIEW_MODE" = true ]; then
     show_preview
@@ -300,11 +327,12 @@ OUTPUT_FILE=$(build_output_filename)
 
 # Display compilation info
 print_info "Compiling: ${BOLD}${ROLE_NAME}${NC}"
-if [ "$INCLUDE_THESIS" = true ] || [ "$INCLUDE_SOFT_SKILLS" = true ] || [ "$INCLUDE_CONFERENCES" = true ]; then
+if [ "$INCLUDE_THESIS" = true ] || [ "$INCLUDE_SOFT_SKILLS" = true ] || [ "$INCLUDE_CONFERENCES" = true ] || [ "$INCLUDE_PIXEL_LAB" = true ]; then
     echo -ne "  Optional sections: "
     [ "$INCLUDE_THESIS" = true ] && echo -n "thesis "
     [ "$INCLUDE_SOFT_SKILLS" = true ] && echo -n "soft-skills "
     [ "$INCLUDE_CONFERENCES" = true ] && echo -n "conferences "
+    [ "$INCLUDE_PIXEL_LAB" = true ] && echo -n "pixel-lab "
     echo ""
 fi
 
@@ -322,6 +350,7 @@ cat > temp_resume.tex << 'PREAMBLE_END'
 \newif\ifincludesoftskills
 \newif\ifincludeedutools
 \newif\ifincludeconferences
+\newif\ifincludepixellab
 
 % Set role flags (only one should be true)
 \cryptoengineerfalse
@@ -357,6 +386,12 @@ if [ "$INCLUDE_CONFERENCES" = true ]; then
     echo "\\includeconferencestrue" >> temp_resume.tex
 else
     echo "\\includeconferencesfalse" >> temp_resume.tex
+fi
+
+if [ "$INCLUDE_PIXEL_LAB" = true ]; then
+    echo "\\includepixellabtrue" >> temp_resume.tex
+else
+    echo "\\includepixellabfalse" >> temp_resume.tex
 fi
 
 # Append the main resume content
