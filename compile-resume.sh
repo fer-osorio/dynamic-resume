@@ -61,47 +61,45 @@ print_info() {
 
 show_help() {
     print_header
-    cat << EOF
-${BOLD}USAGE:${NC}
-  ./compile-resume.sh <role> [options]
-
-${BOLD}ROLES (choose exactly one):${NC}
-  --crypto              Cryptography Engineer (most specialized)
-  --security            Security Engineer (Cryptography Focus)
-  --software            Software Engineer (Security Focus)
-  --applied             Applied Cryptographer (research focus)
-
-${BOLD}OPTIONS:${NC}
-  --thesis              Include thesis project section
-  --soft-skills         Include professional/soft skills section
-  --conferences         Include conference presentations section
-  --no-edu-tools        Exclude educational tools section (included by default)
-  --preview             Show configuration without compiling
-  --clean               Clean auxiliary files and exit
-  --help                Show this help message
-
-${BOLD}EXAMPLES:${NC}
-  ${CYAN}# Cryptography Engineer with thesis${NC}
-  ./compile-resume.sh --crypto --thesis
-
-  ${CYAN}# Software Engineer with soft skills${NC}
-  ./compile-resume.sh --software --soft-skills
-
-  ${CYAN}# Security Engineer, preview before compile${NC}
-  ./compile-resume.sh --security --preview
-
-  ${CYAN}# Applied Cryptographer with all research sections${NC}
-  ./compile-resume.sh --applied --thesis --conferences
-
-${BOLD}OUTPUT FILES:${NC}
-  resume-cryptography-engineer.pdf
-  resume-security-engineer.pdf
-  resume-software-engineer.pdf
-  resume-applied-cryptographer.pdf
-
-  (suffixes added for --thesis, --soft-skills, --conferences)
-
-EOF
+    echo -e "${BOLD}USAGE:${NC}"
+    echo -e "  ./compile-resume.sh <role> [options]"
+    echo ""
+    echo -e "${BOLD}ROLES (choose exactly one):${NC}"
+    echo -e "  ${CYAN}--crypto${NC}              Cryptography Engineer (most specialized)"
+    echo -e "  ${CYAN}--security${NC}            Security Engineer (Cryptography Focus)"
+    echo -e "  ${CYAN}--software${NC}            Software Engineer (Security Focus)"
+    echo -e "  ${CYAN}--applied${NC}             Applied Cryptographer (research focus)"
+    echo ""
+    echo -e "${BOLD}OPTIONS:${NC}"
+    echo -e "  ${CYAN}--thesis${NC}              Include thesis project section"
+    echo -e "  ${CYAN}--soft-skills${NC}         Include professional/soft skills section"
+    echo -e "  ${CYAN}--conferences${NC}         Include conference presentations section"
+    echo -e "  ${CYAN}--no-edu-tools${NC}        Exclude educational tools section (included by default)"
+    echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
+    echo -e "  ${CYAN}--clean${NC}               Clean auxiliary files and exit"
+    echo -e "  ${CYAN}--help${NC}                Show this help message"
+    echo ""
+    echo -e "${BOLD}EXAMPLES:${NC}"
+    echo -e "  ${GREEN}# Cryptography Engineer with thesis${NC}"
+    echo -e "  ./compile-resume.sh --crypto --thesis"
+    echo ""
+    echo -e "  ${GREEN}# Software Engineer with soft skills${NC}"
+    echo -e "  ./compile-resume.sh --software --soft-skills"
+    echo ""
+    echo -e "  ${GREEN}# Security Engineer, preview before compile${NC}"
+    echo -e "  ./compile-resume.sh --security --preview"
+    echo ""
+    echo -e "  ${GREEN}# Applied Cryptographer with all research sections${NC}"
+    echo -e "  ./compile-resume.sh --applied --thesis --conferences"
+    echo ""
+    echo -e "${BOLD}OUTPUT FILES:${NC}"
+    echo -e "  resume-cryptography-engineer.pdf"
+    echo -e "  resume-security-engineer.pdf"
+    echo -e "  resume-software-engineer.pdf"
+    echo -e "  resume-applied-cryptographer.pdf"
+    echo ""
+    echo -e "  (suffixes added for --thesis, --soft-skills, --conferences)"
+    echo ""
 }
 
 clean_auxiliary_files() {
