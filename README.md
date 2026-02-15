@@ -17,7 +17,7 @@ A flexible LaTeX-based resume system that generates role-specific versions from 
 ## Features
 
 ✅ **4 Role Variants** - Generate resumes for different positions from one source
-✅ **Modular Content** - Different emphasis on skills, projects, and experience  
+✅ **Modular Content** - Different emphasis on skills, projects, and experience
 ✅ **Optional Sections** - Toggle thesis, soft skills, and educational tools
 ✅ **Preview Mode** - See configuration before compiling
 ✅ **Smart Naming** - Auto-generated filenames with descriptive suffixes
@@ -142,22 +142,16 @@ Each role variant customizes:
 - Position has no teaching/education component
 - Pure backend/systems role with no frontend work
 
-### Pixel Lab Project (`--pixel-lab`)
+### Pixel Lab Project (`--no-pixel-lab` for its exclusion)
 
-**Role-based defaults:**
-- **Security Engineer:** Included by default (shows PRNG testing, security metrics)
-- **Software Engineer:** Included by default (shows Python development, package design)
-- **Cryptography Engineer:** Excluded by default (prioritize C/C++ crypto projects)
-- **Applied Cryptographer:** Excluded by default (prioritize theoretical work)
-
-**Include when (or use `--pixel-lab` to override):**
+**Include when:**
 - Job requires Python programming skills
 - Position involves security testing or PRNG validation
 - Role emphasizes statistical analysis or data science
 - Company values multi-language proficiency
 - Space permits showing breadth of skills
 
-**Exclude when:**
+**Exclude when (use `--no-pixel-lab`):**
 - Space is extremely limited (1 page requirement)
 - Position focuses exclusively on C/C++ development
 - Pure cryptographic theory role with no implementation
@@ -190,17 +184,17 @@ Each role variant customizes:
 ./compile-resume.sh --security --thesis --soft-skills
 # Output: resume-security-engineer-thesis-soft.pdf
 
-# Software engineer (Pixel Lab auto-included)
+# Software engineer
 ./compile-resume.sh --software
-# Output: resume-software-engineer-pxl.pdf
+# Output: resume-software-engineer.pdf
 
 # Applied cryptographer with research-focused sections
-./compile-resume.sh --applied --thesis --conferences
+./compile-resume.sh --applied --thesis --conferences --no-pixel-lab
 # Output: resume-applied-cryptographer-thesis-conf.pdf
 
-# Cryptography engineer forcing Pixel Lab inclusion
-./compile-resume.sh --crypto --thesis --pixel-lab
-# Output: resume-cryptography-engineer-thesis-pxl.pdf
+# Cryptography engineer forcing Pixel Lab exclusion
+./compile-resume.sh --crypto --thesis --no-pixel-lab
+# Output: resume-cryptography-engineer-thesis.pdf
 ```
 
 ### Preview Before Compiling

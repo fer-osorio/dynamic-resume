@@ -24,11 +24,11 @@ ROLE_FLAG=""
 ROLE_NAME=""
 OUTPUT_SUFFIX=""
 
-INCLUDE_THESIS=false
-INCLUDE_SOFT_SKILLS=false
-INCLUDE_EDU_TOOLS=true  # Default ON
-INCLUDE_CONFERENCES=false  # Default OFF (more research-oriented)
-INCLUDE_PIXEL_LAB=""  # Role-based default (set after role selection)
+INCLUDE_SOFT_SKILLS=false # Default OFF (more management-oriented)
+INCLUDE_PIXEL_LAB=true    # Default ON
+INCLUDE_THESIS=false      # Default OFF (more research-oriented)
+INCLUDE_EDU_TOOLS=true    # Default ON
+INCLUDE_CONFERENCES=false # Default OFF (more research-oriented)
 
 PREVIEW_MODE=false
 CLEAN_ONLY=false
@@ -75,7 +75,7 @@ show_help() {
     echo -e "  ${CYAN}--thesis${NC}              Include thesis project section"
     echo -e "  ${CYAN}--soft-skills${NC}         Include professional/soft skills section"
     echo -e "  ${CYAN}--conferences${NC}         Include conference presentations section"
-    echo -e "  ${CYAN}--pixel-lab${NC}           Include Pixel Lab project (default: auto per role)"
+    echo -e "  ${CYAN}--no-pixel-lab${NC}        Exclude Pixel Lab project (included by default)"
     echo -e "  ${CYAN}--no-edu-tools${NC}        Exclude educational tools section (included by default)"
     echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
     echo -e "  ${CYAN}--clean${NC}               Clean auxiliary files and exit"
@@ -138,10 +138,6 @@ build_output_filename() {
         filename="${filename}-conf"
     fi
 
-    if [ "$INCLUDE_PIXEL_LAB" = true ]; then
-        filename="${filename}-pxl"
-    fi
-
     echo "${filename}.pdf"
 }
 
@@ -160,13 +156,13 @@ show_preview() {
     if [ "$INCLUDE_THESIS" = true ]; then
         echo -e "  Thesis:         ${GREEN}✓ INCLUDED${NC}"
     else
-        echo -e "  Thesis:         ${YELLOW}✗ EXCLUDED${NC}"
+        echo -e "  Thesis:         ${YELLOW}✗ EXCLUDED${NC} (default)"
     fi
 
     if [ "$INCLUDE_SOFT_SKILLS" = true ]; then
         echo -e "  Soft Skills:    ${GREEN}✓ INCLUDED${NC}"
     else
-        echo -e "  Soft Skills:    ${YELLOW}✗ EXCLUDED${NC}"
+        echo -e "  Soft Skills:    ${YELLOW}✗ EXCLUDED${NC} (default)"
     fi
 
     if [ "$INCLUDE_CONFERENCES" = true ]; then
@@ -176,7 +172,7 @@ show_preview() {
     fi
 
     if [ "$INCLUDE_PIXEL_LAB" = true ]; then
-        echo -e "  Pixel Lab:      ${GREEN}✓ INCLUDED${NC}"
+        echo -e "  Pixel Lab:      ${GREEN}✓ INCLUDED${NC} (default)"
     else
         echo -e "  Pixel Lab:      ${YELLOW}✗ EXCLUDED${NC}"
     fi
@@ -255,8 +251,8 @@ while [ $# -gt 0 ]; do
         --conferences)
             INCLUDE_CONFERENCES=true
             ;;
-        --pixel-lab)
-            INCLUDE_PIXEL_LAB="true"  # Explicit override
+        --no-pixel-lab)
+            INCLUDE_PIXEL_LAB=false
             ;;
         --no-edu-tools)
             INCLUDE_EDU_TOOLS=false
@@ -295,18 +291,6 @@ fi
 
 # Validate role selection
 validate_role
-
-# Set role-based defaults for Pixel Lab (if not explicitly set by user)
-if [ -z "$INCLUDE_PIXEL_LAB" ]; then
-    case "$ROLE" in
-        crypto|applied)
-            INCLUDE_PIXEL_LAB=false  # Prioritize C/C++ crypto projects
-            ;;
-        security|software)
-            INCLUDE_PIXEL_LAB=true   # Show Python skills
-            ;;
-    esac
-fi
 
 # Show preview if requested
 if [ "$PREVIEW_MODE" = true ]; then
