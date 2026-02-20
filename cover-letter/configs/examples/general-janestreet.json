@@ -1,0 +1,18 @@
+{
+  "company": {
+    "name": "Jane Street",
+    "position": null,
+    "focus_area": null
+  },
+  "job_requirements": {
+    "primary": "high-performance systems",
+    "secondary": "financial cryptography"
+  },
+  "projects": {
+    "mode": "manual",
+    "add": ["ntru", "aes", "pixel-lab"]
+  },
+  "customization": {
+    "opening_hook": "Your firm's approach to quantitative trading resonates with my mathematical background and passion for elegant problem-solving."
+  }
+}
