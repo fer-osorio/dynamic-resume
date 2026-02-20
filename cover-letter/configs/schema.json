@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/fer-osorio/dynamic-resume/cover-letter/configs/schema.json",
+  "title": "Cover Letter Configuration",
+  "type": "object",
+  "required": ["company", "job_requirements", "projects"],
+  "properties": {
+    "company": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "position": {
+          "type": ["string", "null"],
+          "description": "Job title (null for general applications)"
+        },
+        "focus_area": {
+          "type": ["string", "null"],
+          "description": "Specific area of company work you're interested in"
+        }
+      }
+    },
+    "job_requirements": {
+      "type": "object",
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "Main job requirement or skill area"
+        },
+        "secondary": {
+          "type": ["string", "null"],
+          "description": "Secondary requirement (optional)"
+        },
+        "tertiary": {
+          "type": ["string", "null"],
+          "description": "Tertiary requirement (optional)"
+        }
+      }
+    },
+    "projects": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["auto", "manual", "hybrid"],
+          "description": "Project selection mode"
+        },
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ntru", "aes", "pixel-lab", "thesis", "educational-tools"]
+          },
+          "description": "Projects to add"
+        },
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ntru", "aes", "pixel-lab", "thesis", "educational-tools"]
+          },
+          "description": "Projects to remove"
+        }
+      }
+    },
+    "customization": {
+      "type": "object",
+      "properties": {
+        "opening_hook": {
+          "type": ["string", "null"],
+          "description": "Custom opening sentence"
+        },
+        "closing_note": {
+          "type": ["string", "null"],
+          "description": "Custom closing note"
+        }
+      }
+    }
+  }
+}
