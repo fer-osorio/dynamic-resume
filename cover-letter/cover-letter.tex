@@ -1,0 +1,332 @@
+\documentclass[11pt,a4paper]{article}
+
+% =============================================================================
+% COVER LETTER TEMPLATE v1.0
+% =============================================================================
+% Conditional flags and content macros are prepended by compile-cover-letter.sh.
+%
+% Available flags (role — mutually exclusive):
+%   \ifcryptoengineer, \ifsecurityengineer, \ifsoftwareengineer,
+%   \ifappliedcrypto, \ifgeneralapplication
+%
+% Available flags (projects — 1-3 slots):
+%   \ifprojectone, \ifprojecttwo, \ifprojectthree
+%
+% Available macros (injected from JSON config):
+%   \CompanyName, \PositionTitle, \FocusArea
+%   \PrimaryReq, \SecondaryReq, \TertiaryReq
+%   \OpeningHook, \ClosingNote
+%   \ProjectNameN, \ProjectURLN, \ProjectDescN  (N = 1,2,3)
+% =============================================================================
+
+% GENERATED_FLAGS_AND_MACROS_HERE
+
+% =============================================================================
+% CONDITIONAL DISPLAY HELPERS
+% =============================================================================
+
+\newcommand{\showcrypto}[1]{\ifcryptoengineer#1\fi}
+\newcommand{\showsecurity}[1]{\ifsecurityengineer#1\fi}
+\newcommand{\showsoftware}[1]{\ifsoftwareengineer#1\fi}
+\newcommand{\showapplied}[1]{\ifappliedcrypto#1\fi}
+\newcommand{\showgeneral}[1]{\ifgeneralapplication#1\fi}
+
+% OR-logic helpers
+\newcommand{\showcryptoorsecurity}[1]{\ifcryptoengineer#1\else\ifsecurityengineer#1\fi\fi}
+\newcommand{\showcryptoorapplied}[1]{\ifcryptoengineer#1\else\ifappliedcrypto#1\fi\fi}
+\newcommand{\showengineering}[1]{\ifcryptoengineer#1\else\ifsecurityengineer#1\else\ifsoftwareengineer#1\fi\fi\fi}
+\newcommand{\shownotgeneral}[1]{\ifgeneralapplication\else#1\fi}
+
+% =============================================================================
+% PACKAGES
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage[expansion=false]{microtype}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Cover Letter -- Alexis Fernando Osorio Sarabio},
+    pdfauthor={Alexis Fernando Osorio Sarabio}
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+% =============================================================================
+% OPENING PARAGRAPH
+% =============================================================================
+% Each variant: identity + value proposition + company connection + specific interest
+% \OpeningHook (if non-empty) replaces the first sentence with a custom hook.
+
+\newcommand{\openingparagraph}{%
+
+    \showcrypto{%
+        \ifx\OpeningHook\empty
+            As a cryptography specialist with deep expertise in post-quantum systems and
+            production-grade implementations, I was immediately drawn to \textbf{\CompanyName}.%
+        \else
+            \OpeningHook%
+        \fi{}
+        \ifx\FocusArea\empty\else
+            \ Your work in \textbf{\FocusArea} aligns directly with my research and engineering
+            background.%
+        \fi{}
+        \ I have spent the last two years designing and optimizing NIST-compliant cryptographic
+        protocols---including NTRU-based post-quantum key encapsulation and AES encryption
+        libraries---achieving measurable performance improvements while maintaining rigorous
+        security properties.
+        \ifx\PositionTitle\empty\else
+            \ The \textbf{\PositionTitle} role represents exactly the kind of challenge I am
+            looking to take on next.%
+        \fi%
+    }
+
+    \showsecurity{%
+        \ifx\OpeningHook\empty
+            As a security engineer specializing in cryptographic implementations, I was drawn
+            to \textbf{\CompanyName} and your commitment to building resilient, standards-compliant
+            security infrastructure.%
+        \else
+            \OpeningHook%
+        \fi{}
+        \ifx\FocusArea\empty\else
+            \ Your focus on \textbf{\FocusArea} maps directly to my hands-on experience.%
+        \fi{}
+        \ I have built production-grade cryptographic systems from the ground up---implementing
+        NIST-validated AES libraries, post-quantum key exchange protocols, and comprehensive
+        security testing frameworks---always with an emphasis on correctness, compliance,
+        and measurable security guarantees.
+        \ifx\PositionTitle\empty\else
+            \ I believe the \textbf{\PositionTitle} opening is a strong mutual fit.%
+        \fi%
+    }
+
+    \showsoftware{%
+        \ifx\OpeningHook\empty
+            I am a software engineer with a security and cryptography specialization,
+            and \textbf{\CompanyName}'s engineering culture caught my attention immediately.%
+        \else
+            \OpeningHook%
+        \fi{}
+        \ifx\FocusArea\empty\else
+            \ Your emphasis on \textbf{\FocusArea} resonates with the kind of problems
+            I most enjoy solving.%
+        \fi{}
+        \ My work centers on high-performance C/C++ systems with robust cryptographic
+        foundations---clean architecture, comprehensive testing, and code that lasts.
+        I have delivered a 20$\times$ throughput improvement in a post-quantum cryptosystem
+        and a $2\times$ performance gain in an AES library, both through careful algorithmic
+        analysis rather than premature optimization.
+        \ifx\PositionTitle\empty\else
+            \ I am excited about the \textbf{\PositionTitle} position and the technical
+            challenges it entails.%
+        \fi%
+    }
+
+    \showapplied{%
+        \ifx\OpeningHook\empty
+            As an applied cryptographer bridging theoretical research and production-quality
+            software, I was compelled to reach out to \textbf{\CompanyName}.%
+        \else
+            \OpeningHook%
+        \fi{}
+        \ifx\FocusArea\empty\else
+            \ Your work in \textbf{\FocusArea} sits precisely at the intersection of
+            the theory and practice I care most about.%
+        \fi{}
+        \ My Master's research on post-quantum secure communication protocols produced
+        both peer-reviewed contributions and working C++ implementations; I see no value
+        in theory that cannot be deployed, nor in code that lacks formal foundations.
+        \ifx\PositionTitle\empty\else
+            \ The \textbf{\PositionTitle} role looks like an ideal home for that philosophy.%
+        \fi%
+    }
+
+    \showgeneral{%
+        \ifx\OpeningHook\empty
+            I am a computer scientist and mathematician who likes to solve complex problems
+            elegantly---so, to the surprise of no one, when I came across \textbf{\CompanyName}
+            I was compelled to reach out.%
+        \else
+            \OpeningHook%
+        \fi{}
+        \ifx\FocusArea\empty\else
+            \ Your work in \textbf{\FocusArea} is exactly the kind of challenge
+            I am looking for.%
+        \fi{}
+        \ My background spans post-quantum cryptography, symmetric encryption, statistical
+        security analysis, and web development---I am most energized when I can bring
+        mathematical rigor to engineering problems that matter.%
+    }
+}
+
+% =============================================================================
+% REQUIREMENTS PARAGRAPH
+% =============================================================================
+
+\newcommand{\requirementsparagraph}{%
+    The position emphasizes
+    \ifx\PrimaryReq\empty
+        technical excellence and security expertise%
+    \else
+        \textbf{\PrimaryReq}%
+    \fi%
+    \ifx\SecondaryReq\empty\else
+        \ and \textbf{\SecondaryReq}%
+    \fi%
+    \ifx\TertiaryReq\empty\else
+        \ as well as \textbf{\TertiaryReq}%
+    \fi%
+    . My project work provides direct evidence of these capabilities:%
+}
+
+% =============================================================================
+% PROJECT DESCRIPTIONS
+% =============================================================================
+
+\newcommand{\projectdescriptions}{%
+    \begin{itemize}
+        \setlength{\itemsep}{4pt}
+
+        \ifprojectone
+            \item \textbf{\ProjectNameOne}
+                \ (\href{\ProjectURLOne}{\texttt{GitHub}}):\\
+                \ProjectDescOne
+        \fi
+
+        \ifprojecttwo
+            \item \textbf{\ProjectNameTwo}
+                \ (\href{\ProjectURLTwo}{\texttt{GitHub}}):\\
+                \ProjectDescTwo
+        \fi
+
+        \ifprojectthree
+            \item \textbf{\ProjectNameThree}
+                \ (\href{\ProjectURLThree}{\texttt{GitHub}}):\\
+                \ProjectDescThree
+        \fi
+    \end{itemize}%
+}
+
+% =============================================================================
+% CLOSING PARAGRAPH
+% =============================================================================
+
+\newcommand{\closingstatement}{%
+    \showengineering{%
+        I am reaching out because my work philosophy resonates with what great engineering
+        teams stand for: rigorous thinking, clean execution, and a genuine commitment to
+        making things that work well and last. I am confident I can contribute meaningfully
+        to \textbf{\CompanyName}'s goals from day one.%
+    }
+
+    \showapplied{%
+        I am reaching out because I believe the best applied cryptography happens when
+        theorists and engineers work in the same room---or are the same person. I would
+        welcome the opportunity to bring that perspective to \textbf{\CompanyName}'s team.%
+    }
+
+    \showgeneral{%
+        I am reaching out because my work philosophy and my ethics resonate with what
+        \textbf{\CompanyName} stands for. I work hard to see problems as they are,
+        and harder still to solve them elegantly---and I know I do my best work alongside
+        people who hold themselves to the same standard.%
+    }
+
+    \ifx\ClosingNote\empty\else
+        \par\ClosingNote%
+    \fi
+
+    \par
+    My CV provides further detail on my technical qualifications and project experience.
+    I hope you will allow me the opportunity to show how my skills and work ethic can
+    contribute to your team's success. Thank you for your consideration.%
+}
+
+% =============================================================================
+% DOCUMENT BODY
+% =============================================================================
+
+\begin{document}
+
+% --- Header ---
+\begin{center}
+    {\LARGE \textbf{Alexis Fernando Osorio Sarabio}}\\[4pt]
+    \showcrypto{\large\textit{Cryptography Engineer}}
+    \showsecurity{\large\textit{Security Engineer}}
+    \showsoftware{\large\textit{Software Engineer}}
+    \showapplied{\large\textit{Applied Cryptographer}}
+    \showgeneral{\large\textit{Computer Scientist \& Mathematician}}
+
+    \vspace{6pt}
+
+    \normalsize
+    Mexico City, Mexico\quad$|$\quad+52 95 4128 6658\\
+    \href{mailto:alexis.fernando.osorio.sarabio@gmail.com}{alexis.fernando.osorio.sarabio@gmail.com}\quad$|$\quad
+    \href{https://fer-osorio.github.io/mathematical-foundations}{Portfolio}\quad$|$\quad
+    \href{https://github.com/fer-osorio}{GitHub}\quad$|$\quad
+    \href{https://www.linkedin.com/in/alexis-fernando-osorio-sarabio-0b755b346}{LinkedIn}
+\end{center}
+
+\vspace{10pt}
+\hrule
+\vspace{14pt}
+
+% --- Date and Recipient ---
+\today
+
+\vspace{8pt}
+
+\textbf{\CompanyName}%
+\ifx\PositionTitle\empty
+    \\Talent Acquisition Team%
+\else
+    \\Hiring Team --- \textbf{\PositionTitle}%
+\fi
+
+\vspace{8pt}
+
+Dear \textbf{\CompanyName} Team,
+
+\vspace{4pt}
+
+% --- Opening ---
+\openingparagraph
+
+% --- Requirements & Projects ---
+\requirementsparagraph
+
+\projectdescriptions
+
+% --- Closing ---
+\closingstatement
+
+\vspace{18pt}
+
+Sincerely,
+
+\vspace{12pt}
+
+\textbf{Alexis Fernando Osorio Sarabio}
+
+% --- Footer ---
+\vfill
+\begin{center}
+    \scriptsize
+    \showcrypto{\textbf{Cryptography Engineer}}
+    \showsecurity{\textbf{Security Engineer}}
+    \showsoftware{\textbf{Software Engineer}}
+    \showapplied{\textbf{Applied Cryptographer}}
+    \showgeneral{\textbf{General Application}}
+    \ $\bullet$ \textbf{\CompanyName} $\bullet$ Generated \today
+\end{center}
+
+\end{document}
