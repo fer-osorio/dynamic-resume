@@ -1,0 +1,16 @@
+{
+  "company": {
+    "name": "[COMPANY_NAME]",
+    "position": null,
+    "focus_area": null
+  },
+  "job_requirements": {
+    "primary": "[GENERAL_AREA_OF_INTEREST]"
+  },
+  "projects": {
+    "mode": "auto"
+  },
+  "customization": {
+    "opening_hook": "[WHY_THIS_COMPANY_SPECIFICALLY]"
+  }
+}

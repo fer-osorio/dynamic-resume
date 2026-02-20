@@ -1,0 +1,14 @@
+{
+  "company": {
+    "name": "[COMPANY_NAME]",
+    "position": "[JOB_TITLE]",
+    "focus_area": "[WHAT_INTERESTS_YOU]"
+  },
+  "job_requirements": {
+    "primary": "[KEY_REQUIREMENT_FROM_JD]",
+    "secondary": "[SECONDARY_REQUIREMENT]"
+  },
+  "projects": {
+    "mode": "auto"
+  }
+}
