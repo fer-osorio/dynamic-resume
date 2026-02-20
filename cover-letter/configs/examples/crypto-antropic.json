@@ -1,0 +1,14 @@
+{
+  "company": {
+    "name": "Anthropic",
+    "position": "Cryptography Engineer",
+    "focus_area": "secure model training infrastructure"
+  },
+  "job_requirements": {
+    "primary": "post-quantum cryptographic protocols",
+    "secondary": "secure key management systems"
+  },
+  "projects": {
+    "mode": "auto"
+  }
+}
