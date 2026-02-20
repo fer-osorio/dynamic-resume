@@ -1,0 +1,118 @@
+{
+  "projects": [
+    {
+      "id": "ntru",
+      "name": "Post-Quantum Key Exchange Protocol",
+      "technologies": ["C++", "NTRU", "Lattice-based Cryptography"],
+      "url": "https://github.com/fer-osorio/NTRUencryption",
+      "short_description": "Quantum-resistant KEM with 20x performance optimization via polynomial arithmetic",
+      "relevance": {
+        "crypto": 10,
+        "security": 9,
+        "software": 7,
+        "applied": 10,
+        "general": 8
+      },
+      "descriptions": {
+        "crypto": "Implemented NIST-compliant post-quantum KEM achieving 20x performance improvement through polynomial optimization in truncated polynomial rings, reducing complexity from O(n^4) to O(n^2)",
+        "security": "Built production-grade quantum-resistant encryption with comprehensive security testing (500+ test cases) and compliance validation against NIST PQC standardization requirements",
+        "software": "Developed high-performance C++ cryptographic library with modular architecture, extensive automated testing, and clean APIs achieving 20x throughput improvement",
+        "applied": "Research-driven implementation translating lattice cryptography theory into practical deployment, with formal complexity analysis and rigorous statistical validation across 50,000+ operations",
+        "general": "Advanced cryptographic system demonstrating strong mathematical foundations and engineering excellence, achieving 20x performance gain through algorithmic optimization"
+      },
+      "default": true
+    },
+    {
+      "id": "aes",
+      "name": "AES Encryption Library",
+      "technologies": ["C/C++", "NIST Standards", "Cryptographic Validation"],
+      "url": "https://github.com/fer-osorio/AESencryption",
+      "short_description": "NIST FIPS 197-compliant AES with multiple cipher modes and 2x performance optimization",
+      "relevance": {
+        "crypto": 9,
+        "security": 10,
+        "software": 8,
+        "applied": 7,
+        "general": 7
+      },
+      "descriptions": {
+        "crypto": "NIST FIPS 197-compliant AES implementation with 300+ test vector validations, 2x throughput improvement (250 to 500 MB/s), and statistical randomness verification at 99% confidence",
+        "security": "Production-grade encryption library validated against NIST FIPS 197 and SP 800-38A across CBC, CTR, ECB, and OFB modes, with automated security metrics and zero compliance failures",
+        "software": "Well-architected C++ library supporting multiple cipher modes with 2x performance improvement, comprehensive testing, multi-format file handling (up to 100MB, zero memory leaks), and clear documentation",
+        "applied": "Standards-based implementation demonstrating theory-to-practice translation with formal specification compliance, statistical validation framework, and metrics used in peer-reviewed research",
+        "general": "Professional-quality encryption system achieving industry standard compliance and 2x performance optimization through algorithmic analysis and cache-aware memory access patterns"
+      },
+      "default": false
+    },
+    {
+      "id": "pixel-lab",
+      "name": "Pixel Lab – Cryptanalytic Image Analysis Toolkit",
+      "technologies": ["Python", "Statistical Analysis", "NumPy"],
+      "url": "https://github.com/fer-osorio/pixel-lab",
+      "short_description": "Python toolkit for PRNG validation using entropy, chi-square, and correlation analysis",
+      "relevance": {
+        "crypto": 7,
+        "security": 8,
+        "software": 9,
+        "applied": 8,
+        "general": 6
+      },
+      "descriptions": {
+        "crypto": "Statistical cryptanalysis toolkit achieving 99% accuracy in PRNG quality assessment via Shannon entropy, chi-square testing, and correlation analysis across 50,000+ operations",
+        "security": "PRNG security testing framework with automated weakness detection, successfully identifying vulnerabilities in 3 common PRNG implementations through entropy analysis and Monte Carlo validation",
+        "software": "Production-grade pip-installable Python package with 80%+ test coverage, CLI tools, and comprehensive documentation; implements pixel-level manipulation and batch processing with NumPy integration",
+        "applied": "Information-theoretic analysis toolkit bridging cryptographic theory and empirical validation, with educational examples covering PRNG testing, algorithmic art, and steganography analysis",
+        "general": "Multi-language development capability (Python) with security testing and statistical analysis, demonstrating breadth of skills beyond core cryptographic work"
+      },
+      "default": false
+    },
+    {
+      "id": "thesis",
+      "name": "Secure Communication Protocol",
+      "technologies": [
+        "Cryptographic Protocols",
+        "System Architecture",
+        "Post-Quantum Security"
+      ],
+      "url": "https://github.com/fer-osorio/Tesis-maestria-MTC",
+      "short_description": "End-to-end quantum-resistant communication scheme (Master's thesis research)",
+      "relevance": {
+        "crypto": 8,
+        "security": 7,
+        "software": 5,
+        "applied": 10,
+        "general": 6
+      },
+      "descriptions": {
+        "crypto": "Complete post-quantum communication protocol with rigorous mathematical foundations, security proofs under quantum threat models, and integration of NTRU-based key exchange with symmetric encryption",
+        "security": "Quantum-resistant system design for Master's thesis, addressing emerging quantum computing security threats through end-to-end protocol engineering and formal security analysis",
+        "software": "Modular communication system architecture with clean separation of concerns across key exchange, encryption, and communication layers, emphasizing component reusability",
+        "applied": "Master's research combining theoretical cryptographic design and practical implementation, including formal security proofs, complexity analysis, and proof-of-concept validation",
+        "general": "Advanced graduate research demonstrating deep technical capabilities in designing and implementing novel cryptographic communication systems"
+      },
+      "default": false
+    },
+    {
+      "id": "educational-tools",
+      "name": "Mathematical Foundations Website",
+      "technologies": ["HTML", "CSS", "JavaScript", "Web Cryptography"],
+      "url": "https://fer-osorio.github.io/mathematical-foundations",
+      "short_description": "Interactive cryptographic demonstrations: RSA, ECC, hash functions, and key exchange protocols",
+      "relevance": {
+        "crypto": 5,
+        "security": 6,
+        "software": 7,
+        "applied": 6,
+        "general": 8
+      },
+      "descriptions": {
+        "crypto": "Public-facing cryptographic education platform demonstrating RSA, ECC, and hash function concepts interactively, supporting community outreach and cryptographic literacy",
+        "security": "Educational platform showcasing hands-on security demonstrations (ECDH, ECDSA, avalanche effect visualization) that communicate complex implementation concepts to diverse audiences",
+        "software": "Full-stack web application with interactive cryptographic visualizations built in vanilla JavaScript, demonstrating front-end development proficiency alongside core systems work",
+        "applied": "Research communication platform translating advanced cryptographic theory into accessible interactive content, supporting public outreach and academic education goals",
+        "general": "Demonstrates communication skills, self-driven learning, and commitment to making complex technical concepts accessible to broad audiences"
+      },
+      "default": false
+    }
+  ]
+}
