@@ -1,0 +1,297 @@
+% =============================================================================
+% English content definitions — content/en.tex
+% =============================================================================
+% Defines all user-visible strings for the English resume variant.
+% The Spanish counterpart (es.tex) must define the same set of macros.
+% =============================================================================
+
+% Document language (consumed by \usepackage[\documentlanguage]{babel})
+\newcommand{\documentlanguage}{english}
+
+% =============================================================================
+% Section headings
+% =============================================================================
+\newcommand{\secProfessionalSummary}{Professional Summary}
+\newcommand{\secTechnicalSkills}{Technical Skills}
+\newcommand{\secProfessionalExperience}{Professional Experience}
+\newcommand{\secKeyProjects}{Key Projects}
+\newcommand{\secEducationalTools}{Educational Tools \& Demos}
+\newcommand{\secProfessionalSkills}{Professional Skills}
+\newcommand{\secConferences}{Conference Presentations}
+\newcommand{\secEducation}{Education}
+
+% =============================================================================
+% Subsection titles
+% =============================================================================
+\newcommand{\subNTRU}{Post-Quantum Key Exchange Protocol [C++, NTRU, Lattice-based Cryptography]}
+\newcommand{\subAES}{AES Encryption Library [C/C++, NIST Standards, Cryptographic Validation]}
+\newcommand{\subPixelLab}{Pixel Lab - Cryptanalytic Image Analysis Toolkit [Python, Statistical Analysis, NumPy]}
+\newcommand{\subThesis}{Secure Communication Protocol [Cryptographic Protocols, System Architecture, Post-Quantum Security]}
+\newcommand{\subEduTools}{Mathematical Foundations Website [HTML, CSS, JavaScript, Web Cryptography]}
+
+% =============================================================================
+% Project date lines
+% =============================================================================
+\newcommand{\dateNTRU}{March 2023 -- June 2025 (Currently maintaining and upgrading)}
+\newcommand{\dateAES}{January 2024 -- June 2025 (Currently maintaining and upgrading)}
+\newcommand{\datePixelLab}{January 2025 -- Present (Active Development)}
+\newcommand{\dateThesis}{August 2023 -- July 2025 (Master's Thesis Research)}
+\newcommand{\dateEduTools}{July 2025 -- Present (Actively Maintained)}
+
+% =============================================================================
+% Header labels
+% =============================================================================
+\newcommand{\labelLocation}{Location}
+\newcommand{\labelContact}{Contact}
+\newcommand{\labelPortfolio}{Portfolio}
+\newcommand{\labelGitHub}{GitHub}
+\newcommand{\labelLinkedIn}{LinkedIn}
+
+% =============================================================================
+% Role title subtitles (header and footer)
+% =============================================================================
+\newcommand{\roleTitleCrypto}{Cryptography Engineer}
+\newcommand{\roleTitleSecurity}{Security Engineer (Cryptography Focus)}
+\newcommand{\roleTitleSoftware}{Software Engineer (Security Focus)}
+\newcommand{\roleTitleApplied}{Applied Cryptographer}
+
+% =============================================================================
+% Professional Summary — body paragraphs
+% =============================================================================
+\newcommand{\summaryCrypto}{%
+	Cryptography specialist with deep expertise in post-quantum cryptographic systems and production-grade cryptographic implementations. Expert in NTRU lattice-based cryptography, AES encryption, and NIST-compliant security standards. Proven track record designing quantum-resistant protocols, optimizing cryptographic primitives, and conducting rigorous security validation. Strong mathematical foundation with Master's research in secure communication protocols. Seeking challenging cryptography engineering roles developing next-generation security infrastructure and advancing post-quantum cryptography adoption.%
+}
+
+\newcommand{\summarySecurity}{%
+	Security engineer specializing in cryptographic implementations and post-quantum security with practical experience building production-grade encryption systems. Proven expertise implementing NIST-compliant AES encryption libraries, developing quantum-resistant key exchange protocols (NTRU), and optimizing cryptographic performance. Strong foundation in secure software development, security testing, cryptanalysis, and compliance validation. Develop educational web tools and maintain public portfolio demonstrating cryptographic concepts. Seeking security engineering roles designing resilient infrastructure, implementing cryptographic protocols, and advancing organizational security posture.%
+}
+
+\newcommand{\summarySoftware}{%
+	Software engineer with security and cryptography specialization, experienced in building high-performance systems with robust cryptographic foundations. Skilled in C/C++ systems programming, software architecture, automated testing frameworks, and performance optimization. Developed production-grade AES encryption library and NTRU post-quantum cryptosystem with comprehensive testing and documentation. Strong focus on clean code, maintainability, and engineering best practices. Seeking software engineering roles building secure, scalable systems where cryptographic knowledge provides competitive advantage.%
+}
+
+\newcommand{\summaryApplied}{%
+	Applied cryptographer bridging theoretical cryptography and practical implementation, with Master's research in quantum-resistant communication protocols and production-quality cryptographic software. Expert in lattice-based cryptography (NTRU), symmetric encryption (AES), and cryptographic protocol design. Published research on post-quantum cryptography with strong mathematical foundations. Develops open-source cryptographic tools and educational resources demonstrating complex security concepts. Seeking applied cryptography roles in research labs, security-focused startups, or R\&D teams advancing cryptographic theory into deployable solutions.%
+}
+
+% =============================================================================
+% Technical Skills — bullet content
+% =============================================================================
+\newcommand{\skillsCryptoSecShared}{\textbf{Cryptography \& Security:} Post-Quantum Cryptography (NTRU, Lattice-based), Key Encapsulation Mechanisms (KEM), RSA, Elliptic Curve Cryptography (ECC), AES, Block Cipher Modes (CBC, CTR, ECB, OFB), Digital Signatures, Key Exchange, Cryptanalysis, Hash Functions (SHA-2, SHA-3).}
+
+\newcommand{\skillsProgrammingLangSoftware}{\textbf{Programming Languages:} C/C++ (Advanced - Systems Programming, Performance Optimization), Python (Scripting, Automation), Java, Bash Scripting, JavaScript (Web Development, Cryptographic Visualizations), HTML/CSS.}
+
+\newcommand{\skillsSecurityEngShared}{\textbf{Security Engineering:} Cryptographic Protocol Design, Security Testing \& Validation, NIST Standards Compliance (FIPS 197, SP 800-38A, FIPS 180-4), Threat Modeling (STRIDE), Security Metrics (Entropy, Chi-Square, Correlation Analysis).}
+
+\newcommand{\skillsSoftwareEngSoftware}{\textbf{Software Engineering:} System Architecture \& Design Patterns, Performance Optimization \& Profiling, Automated Testing Frameworks (Unit, Integration, System), CI/CD Pipelines, Code Review Best Practices, Modular Design, API Development, Software Development Lifecycle (SDLC).}
+
+\newcommand{\skillsResearchApplied}{\textbf{Research \& Analysis:} Cryptographic Protocol Design \& Analysis, Security Proofs \& Formal Verification, Mathematical Modeling, Algorithm Complexity Analysis, Academic Writing \& Publications, Conference Presentations, Educational Content Development.}
+
+\newcommand{\skillsProgrammingLangCryptoSec}{\textbf{Programming Languages:} C/C++, Python, Java, Bash Scripting, JavaScript, HTML/CSS.}
+
+\newcommand{\skillsDevToolsSoftware}{\textbf{Development Tools \& Practices:} Git (Version Control), Make/CMake (Build Systems), Docker (Containerization), GDB/Valgrind (Debugging \& Memory Analysis), Performance Profiling Tools, Unit Testing Frameworks, Continuous Integration.}
+
+\newcommand{\skillsSecurityToolsCryptoSec}{\textbf{Security Tools \& Libraries:} OpenSSL, GNU Multiple Precision Arithmetic Library (GMP), NIST Test Vectors \& Validation Suites, Statistical Analysis Tools (Entropy, Chi-Square, Correlation), Hardware Security Module (HSM).}
+
+\newcommand{\skillsCryptoLibsApplied}{\textbf{Cryptographic Libraries \& Tools:} OpenSSL, GMP (GNU Multiple Precision), NIST Cryptographic Algorithm Validation, Statistical Test Suites, LaTeX (Mathematical Documentation), Cryptographic Visualization Tools.}
+
+\newcommand{\skillsSystemsShared}{\textbf{Systems \& Platforms:} Linux, Command Line Applications, File Format Handling (Binary, Bitmap, Text), Memory Management, Low-level Optimization, Systems Programming.}
+
+\newcommand{\skillsDocCollabSoftware}{\textbf{Documentation \& Collaboration:} Technical Documentation, API Documentation, Code Documentation Best Practices, Cross-functional Team Collaboration, Knowledge Transfer.}
+
+\newcommand{\skillsDocStdsCryptoSec}{\textbf{Documentation \& Standards:} Technical Writing, NIST Standards Documentation, Security Protocol Specifications, LaTeX, Conference Presentations, Educational Material Development.}
+
+\newcommand{\skillsAcademicApplied}{\textbf{Academic Communication:} LaTeX (Professional Typesetting), Academic Publications, Conference Presentations, Technical Seminars (21+ presentations), Educational Content Creation, Research Documentation.}
+
+\newcommand{\skillsLanguagesShared}{\textbf{Languages:} Spanish (Native), English (Full Professional Proficiency), German (Basic).}
+
+% =============================================================================
+% Professional Experience — title line
+% =============================================================================
+\newcommand{\expTitle}{\textbf{Research Assistant (Cryptography \& Security)} $|$ Instituto Politécnico Nacional, Mexico City $|$ January 2022 -- July 2025}
+
+% Opening statements
+\newcommand{\expOpeningCrypto}{Led cryptographic software development for post-quantum cryptography research, implementing NIST-compliant protocols and conducting rigorous security analysis. \textbf{Achieved 20x performance improvement in NTRU key generation and encryption operations}.}
+
+\newcommand{\expOpeningSecurity}{Led development of cryptographic software for post-quantum cryptography research, implementing production-quality security protocols. \textbf{Delivered 20x faster cryptographic operations} enabling practical deployment of quantum-resistant encryption in resource-constrained environments.}
+
+\newcommand{\expOpeningSoftware}{Led development of cryptographic software for post-quantum cryptography research, implementing production-quality code in C/C++ with comprehensive testing frameworks and extensive documentation. \textbf{Achieved 20x performance improvement in cryptographic operations} through algorithmic enhancements and low-level optimization techniques.}
+
+\newcommand{\expOpeningApplied}{Conducted applied cryptography research on post-quantum systems, bridging theoretical cryptographic design with practical software implementations. \textbf{Reduced polynomial multiplication complexity from $O(n^4)$ to $O(n^2)$} through ring structure exploitation, demonstrating practical applicability of lattice-based cryptography.}
+
+% AES optimization bullets
+\newcommand{\expAesCrypto}{Optimized AES encryption library \textbf{with PKCS\#11-based HSM key storage} achieving \textbf{2x throughput increase on standard hardware} through low level optimization.}
+
+\newcommand{\expAesSecurity}{Optimized AES encryption implementation achieving \textbf{2x performance improvement significantly improving throughput for large-scale secure data operations}.}
+
+\newcommand{\expAesSoftware}{Designed and optimized AES encryption library \textbf{with PKCS\#11-based HSM key storage} achieving \textbf{2x performance improvement through algorithmic refinement}, maintaining complete NIST FIPS 197 compliance.}
+
+\newcommand{\expAesApplied}{Optimized AES encryption implementation achieving \textbf{50\% latency reduction through cache-aware memory access patterns and algorithmic analysis}, demonstrating effective translation of theoretical optimization principles to production cryptographic systems.}
+
+% SHA shared bullet
+\newcommand{\expShaShared}{Implemented SHA-512 hash algorithm with 128-bit number multiplication support, \textbf{achieving 100\% NIST FIPS 180-4 compliance verified through comprehensive test vector validation}.}
+
+% Validation bullets
+\newcommand{\expValidationCrypto}{Developed comprehensive cryptographic validation framework incorporating NIST test vectors and statistical security metrics. \textbf{Validated 100\% correctness} covering multiple cipher modes (ECB, CBC, CTR, OFB).}
+
+\newcommand{\expValidationSecurity}{Developed security test suites incorporating NIST standard test vectors (FIPS 197, SP 800-38A). \textbf{Achieved 100\% test coverage with automated validation of cryptographic properties}.}
+
+\newcommand{\expValidationSoftware}{Built automated testing frameworks and CI/CD pipelines for cryptographic protocol validation. \textbf{Implemented 200+ automated test cases}, facilitating continuous integration with no regressions.}
+
+\newcommand{\expValidationApplied}{Designed validation methodology combining NIST test vectors with statistical analysis (entropy, chi-square, correlation). \textbf{Validated cryptographic randomness quality across 10,000+ encryption operations}, establishing empirical confidence in implementation security properties.}
+
+% Analysis bullets
+\newcommand{\expAnalysisCrypto}{Conducted security analysis including entropy assessment, chi-square testing, and correlation analysis. \textbf{Verified cryptographic randomness with 99.9\% confidence level}.}
+
+\newcommand{\expAnalysisSecurity}{Conducted security analysis including entropy assessment and statistical testing to verify cryptographic randomness. \textbf{Identified and resolved 3 implementation vulnerabilities}.}
+
+\newcommand{\expAnalysisSoftware}{Designed modular, reusable codebase with clean APIs and comprehensive documentation. \textbf{Reduced integration time by 60\%} through well-defined interfaces and extensive inline documentation.}
+
+\newcommand{\expAnalysisApplied}{Published research findings through academic presentations and educational materials. \textbf{Delivered 21+ technical seminars reaching 500+ students and researchers}, effectively translating complex cryptographic theory into accessible educational content.}
+
+% Shared bullets
+\newcommand{\expEduMaterialsShared}{Produced audiovisual educational materials suitable for conference presentations and university lectures. \textbf{Generated 15+ educational videos and interactive demonstrations} communicating advanced cryptographic concepts to diverse technical audiences.}
+
+\newcommand{\expSeminarsShared}{Presented research findings on quantum-resistant cryptography at \textbf{21+ technical seminars}, effectively communicating complex security concepts to undergraduate and graduate audiences.}
+
+\newcommand{\expResearchProductShared}{\textbf{Research product: Scientific article on post-quantum cryptography and efficient implementations} (currently under editorial review before publication).}
+
+% =============================================================================
+% NTRU project bullets
+% =============================================================================
+\newcommand{\ntruOpeningCrypto}{Implemented quantum-resistant Key Encapsulation Mechanism (KEM) using NTRU lattice-based cryptography, providing security against quantum computer attacks..}
+
+\newcommand{\ntruOpeningSecurity}{Implemented quantum-resistant Key Encapsulation Mechanism (KEM) using NTRU lattice-based cryptography, designed to withstand both classical and quantum attacks.}
+
+\newcommand{\ntruOpeningSoftware}{Implemented quantum-resistant Key Encapsulation Mechanism (KEM) using NTRU lattice-based cryptography with clean C++ architecture and modular design.}
+
+\newcommand{\ntruOpeningApplied}{Implemented NTRU lattice-based post-quantum Key Encapsulation Mechanism, translating theoretical lattice cryptography into validated software. \textbf{Demonstrated practical feasibility of post-quantum cryptography with 2ms key generation and sub-millisecond encryption on commodity hardware}.}
+
+\newcommand{\ntruOptimizationCrypto}{Optimized polynomial operations using ring structure algebraic properties. \textbf{Reduced computational complexity from $O(n^4)$ to $O(n^2)$ while maintaining provable security guarantees}, achieving 20x performance improvement in key generation (from 100ms to 5ms).}
+
+\newcommand{\ntruOptimizationSecurity}{Optimized polynomial operations using ring structure properties. \textbf{Achieved 20x performance improvement reducing key generation time from 100ms to 5ms}, making post-quantum cryptography practical for real-time applications and resource-constrained environments.}
+
+\newcommand{\ntruOptimizationSoftware}{Designed efficient polynomial operation algorithms leveraging ring structure properties. \textbf{Reduced computational complexity from $O(n^4)$ to $O(n^2)$}, improving throughput by 2000\%.}
+
+\newcommand{\ntruOptimizationApplied}{Optimized polynomial multiplication in truncated polynomial rings through algebraic structure exploitation. \textbf{Reduced algorithmic complexity from $O(n^4)$ to $O(n^2)$ with formal complexity analysis}, demonstrating effective application of computational algebra to cryptographic optimization.}
+
+\newcommand{\ntruValidationCrypto}{Developed security validation framework including \textbf{entropy analysis (achieving $H > 7.99$ bits/byte), chi-square testing ($\chi^2$ within 95\% confidence intervals), and correlation analysis}.}
+
+\newcommand{\ntruValidationSecurity}{Developed comprehensive security validation framework including entropy analysis, statistical testing, and correlation analysis, ensuring implementation correctness and security.}
+
+\newcommand{\ntruValidationSoftware}{Built modular architecture with dedicated subsystems for performance profiling, security testing, and debugging utilities. \textbf{Enabled 60\% faster development iteration through comprehensive logging and multiple output formats} (binary, hexadecimal, ASCII).}
+
+\newcommand{\ntruValidationApplied}{Designed statistical validation methodology combining theoretical security analysis with empirical testing. \textbf{Established rigorous validation protocol verified through peer review}, providing framework for validating lattice-based cryptographic implementations.}
+
+% =============================================================================
+% AES project bullets
+% =============================================================================
+\newcommand{\aesOpeningCrypto}{Designed and implemented AES encryption library \textbf{with PKCS\#11-based HSM key storage} supporting multiple block cipher modes (CBC, CTR, ECB, OFB). \textbf{Achieved full NIST compliance verified through official test vectors}.}
+
+\newcommand{\aesOpeningSecurity}{Designed and developed NIST FIPS 197-compliant AES encryption library \textbf{with PKCS\#11-based HSM key storage} supporting multiple block cipher modes for versatile data protection. \textbf{Validated 100\% compliance with NIST standards through comprehensive test coverage}.}
+
+\newcommand{\aesOpeningSoftware}{Designed and developed production-grade AES encryption library with NIST FIPS 197 compliance and modular architecture.}
+
+\newcommand{\aesOpeningApplied}{Implemented NIST FIPS 197-compliant AES encryption library. \textbf{Achieved theoretical and empirical validation through formal specification compliance}.}
+
+\newcommand{\aesComplianceCrypto}{Implemented cryptographic validation framework \textbf{achieving 100\% compliance with NIST test vectors from FIPS 197 and SP 800-38A standards across all key sizes (128/192/256-bit)}.}
+
+\newcommand{\aesComplianceSecurity}{Implemented testing framework validating 100\% compliance with NIST test vectors from FIPS 197 and SP 800-38A standards. \textbf{Achieved zero security vulnerabilities through systematic validation}.}
+
+\newcommand{\aesComplianceSoftware}{Implemented comprehensive testing framework \textbf{with 100\% NIST test vector compliance} and automated test suites.}
+
+\newcommand{\aesComplianceApplied}{Validated implementation correctness through systematic comparison with NIST standard test vectors (FIPS 197, SP 800-38A). \textbf{Demonstrated alignment between theoretical specifications and implementation across 300+ validation cases}, establishing empirical confidence in cryptographic correctness.}
+
+\newcommand{\aesMetricsCrypto}{Built encryption quality metrics analysis module measuring randomness through entropy calculation, statistical distribution tests, and correlation analysis.}
+
+\newcommand{\aesMetricsSecurity}{Built metrics analysis module measuring encryption quality through randomness analysis and statistical validation.}
+
+\newcommand{\aesMetricsSoftware}{Developed multi-format file handler supporting bitmap images, binary data, and text files. \textbf{Processed files up to 100MB with zero memory leaks verified through Valgrind testing}.}
+
+\newcommand{\aesMetricsApplied}{Implemented statistical analysis tools for encryption quality assessment, applying information theory and probability theory. \textbf{Established quantitative metrics framework used in peer-reviewed research}, validating practical cryptographic randomness properties through empirical measurement.}
+
+% =============================================================================
+% Pixel Lab project bullets
+% =============================================================================
+\newcommand{\pixellabOpeningCrypto}{Built Python toolkit for cryptographic randomness validation using statistical cryptanalysis. \textbf{Verified cryptographic-quality randomness detection}, enabling rigorous PRNG evaluation.}
+
+\newcommand{\pixellabOpeningSecurity}{Developed Python toolkit for PRNG validation. \textbf{Achieved automated detection of weak randomness sources through entropy analysis and multiple statistical metrics}.}
+
+\newcommand{\pixellabOpeningSoftware}{Developed production-grade Python package for pixel-level image generation and cryptanalytic analysis. \textbf{Published pip-installable library with 80\%+ test coverage, documentation, and CLI tools}.}
+
+\newcommand{\pixellabOpeningApplied}{Implemented information-theoretic analysis toolkit demonstrating practical application of statistical cryptanalysis and randomness testing methodology. \textbf{Validated theoretical metrics through Monte Carlo $\pi$ estimation and correlation analysis across 50,000+ test cases}, bridging cryptographic theory with empirical validation.}
+
+\newcommand{\pixellabStatsCrypto}{Implemented comprehensive cryptanalytic metrics including Shannon entropy calculation, chi-square uniformity testing, and multi-directional correlation analysis..}
+
+\newcommand{\pixellabStatsSecurity}{Built statistical analysis engine measuring randomness quality through entropy, chi-square, correlation, and Monte Carlo methods.}
+
+\newcommand{\pixellabStatsSoftware}{Implemented pixel-level manipulation \textbf{supporting direct assignment, recursive generation, and batch processing}, showing optimized Python development with NumPy/SciPy integration.}
+
+\newcommand{\pixellabStatsApplied}{Developed metrics interpretation framework with visualization tools for entropy histograms, correlation heatmaps, and distribution analysis. \textbf{Created educational examples demonstrating information theory concepts through interactive image generation}, making complex theoretical concepts accessible.}
+
+\newcommand{\pixellabArchitectureCrypto}{Designed modular architecture with separate ImageGenerator and ImageMetrics classes. \textbf{Achieved clean API design enabling integration into larger security testing frameworks}.}
+
+\newcommand{\pixellabArchitectureSecurity}{Created comprehensive test suite validating correctness of statistical algorithms against known test cases.}
+
+\newcommand{\pixellabArchitectureSoftware}{Built complete development infrastructure including automated testing, CLI tools, and example scripts. \textbf{Implemented CI/CD pipeline with automated testing on multiple Python versions}.}
+
+\newcommand{\pixellabArchitectureApplied}{Published comprehensive documentation including API reference, usage examples, and theoretical background on cryptanalytic metrics. \textbf{Created 4+ educational examples demonstrating PRNG testing, algorithmic art, and steganography analysis}, supporting research and educational applications.}
+
+% =============================================================================
+% Thesis project bullets
+% =============================================================================
+\newcommand{\thesisBulletCrypto}{Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components, with rigorous mathematical foundations supporting both functionality correctness and security proofs under post-quantum threat models.}
+
+\newcommand{\thesisBulletSecurity}{Designed complete end-to-end quantum-resistant communication scheme integrating key exchange and data encryption components for Master's thesis research, addressing emerging quantum computing security threats.}
+
+\newcommand{\thesisBulletSoftware}{Designed modular communication system with clear separation of concerns between key exchange, encryption, and communication layers, emphasizing clean architecture and component reusability for Master's thesis research.}
+
+\newcommand{\thesisBulletApplied}{Designed quantum-resistant communication protocol combining theoretical cryptographic design with practical implementation considerations, including formal security analysis and proof-of-concept implementation for Master's thesis.}
+
+% =============================================================================
+% Educational Tools section content
+% =============================================================================
+\newcommand{\edutoolsPlatformDesc}{\textbf{Platform:} Curated public website showcasing cryptographic research, interactive tools, and educational content demonstrating practical cryptography concepts.}
+
+\newcommand{\edutoolsDemoIntro}{\textbf{Interactive Cryptographic Demonstrations:}}
+
+\newcommand{\edutoolsDemoList}{%
+	\item RSA: Key generation, encryption/decryption workflows, padding schemes (PKCS\#1, OAEP).
+	\item Hash Functions: Avalanche effect visualization, collision resistance estimation, digest computation.
+	\item Elliptic Curves: Point arithmetic, ECDH key exchange protocol, ECDSA digital signatures.%
+}
+
+% =============================================================================
+% Professional Skills (soft skills) section — items
+% =============================================================================
+\newcommand{\softskillOne}{\textbf{Technical Communication:} Presented 21+ technical seminars on cryptographic systems, effectively explaining complex concepts to varied audiences.}
+
+\newcommand{\softskillTwo}{\textbf{Research and education:} Authored educational content for academic and public engagement.}
+
+\newcommand{\softskillThree}{\textbf{Technical Writing:} Developed comprehensive documentation for open-source projects.}
+
+\newcommand{\softskillFour}{\textbf{Self-Directed Learning:} Independently mastered post-quantum cryptography and NIST standards.}
+
+\newcommand{\softskillFive}{\textbf{Problem Solving:} Optimized cryptographic implementations through algorithm optimization and low-level programming.}
+
+\newcommand{\softskillSix}{\textbf{Interdisciplinary Collaboration:} Bridged theoretical cryptography and practical software development, working effectively across mathematical, security, and engineering domains.}
+
+% =============================================================================
+% Conference Presentations section — items
+% =============================================================================
+\newcommand{\conferenceOne}{\textit{``Sistema de cifrado asimétrico resistente a ataques de computadoras cuánticas''} (Asymmetric Encryption System Resistant to Quantum Computer Attacks), \textbf{Congreso Internacional CAECH}, CAECH \& THINSCEN, Mexico City, Mexico, October 2024.}
+
+\newcommand{\conferenceTwo}{\textit{``Sistema de cifrado asimétrico resistente a ataques de computadoras cuánticas''}, \textbf{Congreso Interpolitécnico de Investigación para Alumnos de Posgrado}, Instituto Politécnico Nacional, Mexico City, Mexico, June 2024.}
+
+% =============================================================================
+% Education section — entries
+% =============================================================================
+\newcommand{\educationOne}{%
+\textbf{M.S. in Computer Science} $|$ Centro de Innovación y Desarrollo Tecnológico en Cómputo, Instituto Politécnico Nacional, Mexico City $|$ January 2023 -- July 2025\\
+\textit{Specialization: Cryptography \& Secure Systems}%
+}
+
+\newcommand{\educationTwo}{%
+\textbf{B.S. in Physics and Mathematics} $|$ Escuela Superior de Física y Matemáticas, Instituto Politécnico Nacional, Mexico City $|$ August 2017 -- July 2022\\
+\textit{Specialization: Applied Mathematics}%
+}
