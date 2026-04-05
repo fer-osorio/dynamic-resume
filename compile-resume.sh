@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # =============================================================================
-# Resume Compiler v2.0
+# Resume Compiler v3.0
 # =============================================================================
 # Compiles LaTeX resume with role-specific customization
-# Supports 4 role variants with optional sections
+# Supports 4 role variants, optional sections, and multiple languages
 # =============================================================================
 
 # Color codes for output
@@ -30,6 +30,9 @@ INCLUDE_THESIS=false      # Default OFF (more research-oriented)
 INCLUDE_EDU_TOOLS=true    # Default ON
 INCLUDE_CONFERENCES=false # Default OFF (more research-oriented)
 
+LANG="en"
+SUPPORTED_LANGS=("en" "es")
+
 PREVIEW_MODE=false
 CLEAN_ONLY=false
 
@@ -39,7 +42,7 @@ CLEAN_ONLY=false
 
 print_header() {
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BOLD}  Resume Compiler v2.0${NC}"
+    echo -e "${BOLD}  Resume Compiler v3.0${NC}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 }
@@ -77,6 +80,7 @@ show_help() {
     echo -e "  ${CYAN}--conferences${NC}         Include conference presentations section"
     echo -e "  ${CYAN}--no-pixel-lab${NC}        Exclude Pixel Lab project (included by default)"
     echo -e "  ${CYAN}--no-edu-tools${NC}        Exclude educational tools section (included by default)"
+    echo -e "  ${CYAN}--lang <code>${NC}         Output language: en (default), es"
     echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
     echo -e "  ${CYAN}--clean${NC}               Clean auxiliary files and exit"
     echo -e "  ${CYAN}--help${NC}                Show this help message"
@@ -100,7 +104,7 @@ show_help() {
     echo -e "  resume-software-engineer.pdf"
     echo -e "  resume-applied-cryptographer.pdf"
     echo ""
-    echo -e "  (suffixes added for --thesis, --soft-skills, --conferences)"
+    echo -e "  (suffixes added for --thesis, --soft-skills, --conferences, --lang <non-en>)"
     echo ""
 }
 
@@ -122,6 +126,18 @@ validate_role() {
     fi
 }
 
+validate_lang() {
+    for l in "${SUPPORTED_LANGS[@]}"; do
+        [ "$LANG" = "$l" ] && return 0
+    done
+    print_error "Unsupported language: '${LANG}'"
+    echo ""
+    echo "  Supported languages: $(IFS=' | '; echo "${SUPPORTED_LANGS[*]}")"
+    echo ""
+    echo "  Run './compile-resume.sh --help' for usage information."
+    exit 1
+}
+
 build_output_filename() {
     local filename="resume-${OUTPUT_SUFFIX}"
 
@@ -138,6 +154,10 @@ build_output_filename() {
         filename="${filename}-conf"
     fi
 
+    if [ "$LANG" != "en" ]; then
+        filename="${filename}-${LANG}"
+    fi
+
     echo "${filename}.pdf"
 }
 
@@ -150,6 +170,7 @@ show_preview() {
     echo ""
     echo -e "${BOLD}Role:${NC}             ${ROLE_NAME}"
     echo -e "${BOLD}Role Flag:${NC}        ${ROLE_FLAG}"
+    echo -e "${BOLD}Language:${NC}         ${LANG}"
     echo ""
     echo -e "${BOLD}Optional Sections:${NC}"
 
@@ -257,6 +278,14 @@ while [ $# -gt 0 ]; do
         --no-edu-tools)
             INCLUDE_EDU_TOOLS=false
             ;;
+        --lang)
+            shift
+            if [ -z "$1" ]; then
+                print_error "--lang requires a language code (e.g. en, es)"
+                exit 1
+            fi
+            LANG="$1"
+            ;;
         --preview)
             PREVIEW_MODE=true
             ;;
@@ -291,6 +320,7 @@ fi
 
 # Validate role selection
 validate_role
+validate_lang
 
 # Show preview if requested
 if [ "$PREVIEW_MODE" = true ]; then
@@ -377,6 +407,17 @@ if [ "$INCLUDE_PIXEL_LAB" = true ]; then
 else
     echo "\\includepixellabfalse" >> temp_resume.tex
 fi
+
+# Inject language content file
+CONTENT_FILE="content/${LANG}.tex"
+if [ ! -f "$CONTENT_FILE" ]; then
+    print_error "Content file not found: ${CONTENT_FILE}"
+    echo ""
+    echo "  Expected path: ${CONTENT_FILE}"
+    rm -f temp_resume.tex
+    exit 1
+fi
+cat "$CONTENT_FILE" >> temp_resume.tex
 
 # Append the main resume content
 cat resume.tex >> temp_resume.tex
