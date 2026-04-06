@@ -8,6 +8,7 @@ A flexible LaTeX-based resume system that generates role-specific versions from 
 - [Role Variants](#role-variants)
 - [Optional Sections](#optional-sections)
 - [Usage Examples](#usage-examples)
+- [Language Support](#language-support)
 - [Migration from v1.0](#migration-from-v10)
 - [Technical Architecture](#technical-architecture)
 - [Customization Guide](#customization-guide)
@@ -19,6 +20,7 @@ A flexible LaTeX-based resume system that generates role-specific versions from 
 ✅ **4 Role Variants** - Generate resumes for different positions from one source
 ✅ **Modular Content** - Different emphasis on skills, projects, and experience
 ✅ **Optional Sections** - Toggle thesis, soft skills, and educational tools
+✅ **Multilingual Output** - English and Spanish supported; easily extensible
 ✅ **Preview Mode** - See configuration before compiling
 ✅ **Smart Naming** - Auto-generated filenames with descriptive suffixes
 ✅ **Clean Output** - Automatic cleanup of auxiliary files
@@ -219,15 +221,67 @@ Each role variant customizes:
 
 ---
 
+## Language Support
+
+### Supported Languages
+
+| Code | Language | Default |
+|------|----------|---------|
+| `en` | English  | ✅ yes  |
+| `es` | Spanish  | no      |
+
+### Usage
+
+```bash
+# Default (English) — no flag needed
+./compile-resume.sh --security
+
+# Explicit English — identical output to above
+./compile-resume.sh --security --lang en
+
+# Spanish
+./compile-resume.sh --security --lang es
+# Output: resume-security-engineer-es.pdf
+
+# Spanish with optional sections
+./compile-resume.sh --applied --thesis --conferences --lang es
+# Output: resume-applied-cryptographer-thesis-conf-es.pdf
+```
+
+### Output Filename Convention
+
+```
+resume-<role>[-<sections>][-<lang>].pdf
+```
+
+The language suffix is appended only for non-English output:
+- `--lang en` → `resume-security-engineer.pdf` (no suffix)
+- `--lang es` → `resume-security-engineer-es.pdf`
+
+### Adding a New Language
+
+1. Create `content/<code>.tex` defining **all** macros listed in `content/en.tex`.
+   Every macro name must match exactly — no additions or omissions.
+2. Add the language code to `SUPPORTED_LANGS` in `compile-resume.sh`:
+   ```bash
+   SUPPORTED_LANGS=("en" "es" "de")
+   ```
+3. Compile and verify: `./compile-resume.sh --security --lang de`
+
+---
+
 ## Technical Architecture
 
 ### File Structure
 
 ```
 resume-system/
-├── resume.tex              # Master resume with conditional content
+├── resume.tex              # Master resume (language-agnostic; macro calls only)
 ├── compile-resume.sh       # Compilation orchestrator
-├── README.md              # This file
+├── README.md               # This file
+├── content/
+│   ├── en.tex              # English strings (116 macros)
+│   └── es.tex              # Spanish strings (116 macros)
 └── output/
     ├── resume-cryptography-engineer.pdf
     ├── resume-security-engineer.pdf
@@ -461,10 +515,9 @@ Potential improvements for future versions:
 
 - [ ] ATS keyword optimization per role
 - [ ] PDF metadata customization
-- [ ] Cover letter generation
 - [ ] Automated job description analysis
 - [ ] LaTeX template variants (different layouts)
-- [ ] Multi-language support
+- [ ] Additional language support (de, fr, ...)
 - [ ] GitHub Actions for automated compilation
 
 ---
@@ -483,6 +536,6 @@ This resume system is provided as-is for personal use.
 
 ---
 
-**Version:** 2.0  
-**Last Updated:** 2025-02-11  
+**Version:** 3.0
+**Last Updated:** 2026-04-06
 **Author:** Alexis Fernando Osorio Sarabio

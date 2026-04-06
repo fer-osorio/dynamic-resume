@@ -1,4 +1,4 @@
-# Cover Letter Automation System v1.0
+# Cover Letter Automation System v2.0
 
 Generates role-specific cover letters in PDF format from a single LaTeX template.
 Architecture mirrors **Resume Compilation System v2.0**.
@@ -93,7 +93,8 @@ Project overrides:
   --add-project <id>      Add a project (repeatable)
   --remove-project <id>   Remove a project (repeatable)
 
-Modes:
+Options:
+  --lang <code>           Output language: en (default), es
   --preview               Show configuration, prompt before compiling
   --clean                 Remove auxiliary LaTeX files
   --help                  Show help
@@ -128,10 +129,48 @@ Modes:
 Files are written to the working directory:
 
 ```
-cover-letter-<company-slug>-<role>.pdf
+cover-letter-<company-slug>-<role>[-<lang>].pdf
 ```
 
-Examples: `cover-letter-anthropic-crypto.pdf` · `cover-letter-stripe-security.pdf`
+The language suffix is appended only for non-English output:
+
+| Command | Output filename |
+|---------|----------------|
+| `--security --json ...` | `cover-letter-stripe-security.pdf` |
+| `--security --json ... --lang en` | `cover-letter-stripe-security.pdf` |
+| `--security --json ... --lang es` | `cover-letter-stripe-security-es.pdf` |
+
+---
+
+## Language Support
+
+### Supported Languages
+
+| Code | Language | Default |
+|------|----------|---------|
+| `en` | English  | ✅ yes  |
+| `es` | Spanish  | no      |
+
+### Usage
+
+```bash
+# Default (English)
+./compile-cover-letter.sh --security --json configs/stripe.json
+
+# Spanish
+./compile-cover-letter.sh --security --json configs/stripe.json --lang es
+# Output: cover-letter-stripe-security-es.pdf
+```
+
+### Adding a New Language
+
+1. Create `content/<code>-cover.tex` at the project root, defining all macros
+   present in `content/en-cover.tex`.
+2. Add the language code to `SUPPORTED_LANGS` in `compile-cover-letter.sh`:
+   ```bash
+   SUPPORTED_LANGS=("en" "es" "de")
+   ```
+3. Compile: `./compile-cover-letter.sh --security --json configs/myco.json --lang de`
 
 ---
 
@@ -178,8 +217,12 @@ cover-letter/
 ├── projects
 │   └── project-definitions.json
 └── README.md
+
+content/                        # project root (shared with resume system)
+├── en-cover.tex                # English cover letter macros
+└── es-cover.tex                # Spanish cover letter macros
 ```
 
 ---
 
-**Version:** 1.0 · **Author:** Alexis Fernando Osorio Sarabio
+**Version:** 2.0 · **Last Updated:** 2026-04-06 · **Author:** Alexis Fernando Osorio Sarabio
