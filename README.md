@@ -1,284 +1,153 @@
-# Resume Compilation System v2.0
+# dynamic-resume
 
-A flexible LaTeX-based resume system that generates role-specific versions from a single master document.
+A LaTeX-based system for generating role-specific resumes and cover letters from a single master document per artifact.
+
+---
 
 ## Table of Contents
-- [Features](#features)
-- [Quick Start](#quick-start)
+
+- [Overview](#overview)
+- [Dependencies](#dependencies)
 - [Role Variants](#role-variants)
-- [Optional Sections](#optional-sections)
-- [Usage Examples](#usage-examples)
+- [Resume System](#resume-system)
+  - [Quick Start](#resume-quick-start)
+  - [Optional Sections](#optional-sections)
+  - [Usage Examples](#resume-usage-examples)
+  - [Technical Architecture](#technical-architecture)
+  - [Customization Guide](#customization-guide)
+- [Cover Letter System](#cover-letter-system)
+  - [Quick Start](#cover-letter-quick-start)
+  - [JSON Configuration](#json-configuration)
+  - [CLI Reference](#cli-reference)
+  - [Usage Examples](#cover-letter-usage-examples)
+  - [Project Relevance Matrix](#project-relevance-matrix)
 - [Language Support](#language-support)
-- [Migration from v1.0](#migration-from-v10)
-- [Technical Architecture](#technical-architecture)
-- [Customization Guide](#customization-guide)
+- [Troubleshooting](#troubleshooting)
+- [Best Practices](#best-practices)
+- [FAQ](#faq)
 
 ---
 
-## Features
+## Overview
 
-✅ **4 Role Variants** - Generate resumes for different positions from one source
-✅ **Modular Content** - Different emphasis on skills, projects, and experience
-✅ **Optional Sections** - Toggle thesis, soft skills, and educational tools
-✅ **Multilingual Output** - English and Spanish supported; easily extensible
-✅ **Preview Mode** - See configuration before compiling
-✅ **Smart Naming** - Auto-generated filenames with descriptive suffixes
-✅ **Clean Output** - Automatic cleanup of auxiliary files
-✅ **Validation** - Prevents conflicting role selections
+Two compilation systems sharing a common content directory:
+
+- **Resume Compilation System** — generates role-specific resumes from `resume.tex` via `compile-resume.sh`
+- **Cover Letter Automation System** — generates role-specific cover letters from `cover-letter.tex` via `compile-cover-letter.sh`
+
+Both systems follow the same architecture: a language-agnostic LaTeX master document, role flags passed as preamble conditionals, and a `content/` directory of macro definition files.
 
 ---
 
-## Quick Start
-
-### 1. Ensure LaTeX is Installed
+## Dependencies
 
 ```bash
 # Ubuntu/Debian
 sudo apt-get install texlive-latex-base texlive-latex-extra
 
-# macOS (with Homebrew)
+# macOS (Homebrew)
 brew install --cask mactex
 
 # Fedora
 sudo dnf install texlive-scheme-full
 ```
 
-### 2. Compile Your First Resume
-
-```bash
-# Make script executable (first time only)
-chmod +x compile-resume.sh
-
-# Compile for security engineer role
-./compile-resume.sh --security
-
-# Output: resume-security-engineer.pdf
-```
-
-### 3. Check Available Options
-
-```bash
-./compile-resume.sh --help
-```
+The cover letter system also requires `python3` for project selection logic.
 
 ---
 
 ## Role Variants
 
-The system supports 4 distinct role profiles:
+Both systems support the same role flags:
 
-| Role | Flag | Best For | Output File |
-|------|------|----------|-------------|
-| **Cryptography Engineer** | `--crypto` | Defense contractors, cryptography-focused companies, research labs | `resume-cryptography-engineer.pdf` |
-| **Security Engineer** | `--security` | Tech companies, cybersecurity vendors, fintech | `resume-security-engineer.pdf` |
-| **Software Engineer** | `--software` | General tech companies, startups, product teams | `resume-software-engineer.pdf` |
-| **Applied Cryptographer** | `--applied` | Research institutions, R&D teams, academic-industry hybrid roles | `resume-applied-cryptographer.pdf` |
-
-### What Changes Between Roles?
-
-Each role variant customizes:
-
-1. **Professional Summary** - Different career objectives and value propositions
-2. **Skills Order** - Cryptography first vs. programming first
-3. **Experience Bullets** - Security validation vs. architecture vs. research emphasis
-4. **Project Descriptions** - Cryptographic focus vs. engineering focus vs. research focus
-5. **Section Presence** - Soft skills more prominent for security/research roles
+| Flag | Title | Best For |
+|------|-------|----------|
+| `--crypto` | Cryptography Engineer | Defense contractors, cryptography-focused companies, research labs |
+| `--security` | Security Engineer | Tech companies, cybersecurity vendors, fintech |
+| `--software` | Software Engineer | General tech, startups, product teams |
+| `--applied` | Applied Cryptographer | R&D teams, research institutions, academic-industry hybrid roles |
+| `--general` | General Application | Cover letters only: networking, open applications |
 
 ---
 
-## Optional Sections
+## Resume System
 
-### Thesis Section (`--thesis`)
-
-**Include when:**
-- Applying to research-oriented roles
-- Targeting companies valuing academic contributions
-- Position emphasizes R&D or cryptographic protocol design
-
-**Exclude when:**
-- Applying to pure software engineering roles
-- Thesis is less relevant than other projects
-- Space is limited (trying to keep to 1-2 pages)
-
-### Soft Skills Section (`--soft-skills`)
-
-**Include when:**
-- Applying to senior or team lead positions
-- Job description emphasizes collaboration, communication, or mentorship
-- Targeting defense contractors, government, or large enterprises
-- Position requires stakeholder management or cross-team coordination
-
-**Exclude when:**
-- Applying to pure IC (individual contributor) technical roles
-- Startup or small team positions (culture assessed in interview)
-- Research-heavy positions (publications speak louder)
-- Technical skills are the primary evaluation criteria
-
-**Default:** Excluded (technical skills emphasized)
-
-### Conference Presentations Section (`--conferences`)
-
-**Include when:**
-- Applying to research-oriented roles (Applied Cryptographer, research labs)
-- Job description mentions publications, academic contributions, or thought leadership
-- Targeting positions that value public speaking and community engagement
-- Position emphasizes conference attendance or technical evangelism
-
-**Exclude when:**
-- Applying to pure engineering/implementation roles
-- Space is limited and technical projects are more important
-- Company culture doesn't emphasize external engagement
-
-**Default:** Excluded (more space for technical content)
-
-### Educational Tools Section (`--no-edu-tools`)
-
-**Included by default** - showcases:
-- Web development skills
-- Open-source contributions
-- Public engagement and teaching ability
-- Ability to simplify complex concepts
-
-**Exclude with `--no-edu-tools` when:**
-- Space is extremely limited
-- Position has no teaching/education component
-- Pure backend/systems role with no frontend work
-
-### Pixel Lab Project (`--no-pixel-lab` for its exclusion)
-
-**Include when:**
-- Job requires Python programming skills
-- Position involves security testing or PRNG validation
-- Role emphasizes statistical analysis or data science
-- Company values multi-language proficiency
-- Space permits showing breadth of skills
-
-**Exclude when (use `--no-pixel-lab`):**
-- Space is extremely limited (1 page requirement)
-- Position focuses exclusively on C/C++ development
-- Pure cryptographic theory role with no implementation
-- Resume already shows sufficient Python skills elsewhere
-
----
-
-## Usage Examples
-
-### Basic Compilation
+### Quick Start
 
 ```bash
-# Cryptography Engineer (most specialized)
-./compile-resume.sh --crypto
+# Make executable (first time only)
+chmod +x compile-resume.sh
 
-# Security Engineer (balanced)
+# Compile for security engineer role
 ./compile-resume.sh --security
+# Output: resume-security-engineer.pdf
 
-# Software Engineer (broadest)
-./compile-resume.sh --software
-
-# Applied Cryptographer (research focus)
-./compile-resume.sh --applied
+# See all options
+./compile-resume.sh --help
 ```
 
-### With Optional Sections
+### Optional Sections
+
+#### Thesis (`--thesis`)
+
+Include when applying to research-oriented roles, targeting companies valuing academic contributions, or where the position emphasizes R&D or cryptographic protocol design. Exclude for pure software engineering roles or when space is limited.
+
+#### Soft Skills (`--soft-skills`)
+
+Include for senior or team lead positions, roles emphasizing collaboration or stakeholder management, and defense/government/enterprise targets. Exclude for pure IC technical roles, research-heavy positions, or startups where culture is assessed in interview. Default: excluded.
+
+#### Conference Presentations (`--conferences`)
+
+Include when applying to research-oriented roles or positions that value thought leadership, publications, or technical evangelism. Exclude for pure engineering/implementation roles or when space is limited. Default: excluded.
+
+#### Educational Tools (`--no-edu-tools`)
+
+Included by default. Showcases web development, open-source contributions, and ability to simplify complex concepts. Exclude with `--no-edu-tools` for space-constrained or pure backend/systems roles with no frontend component.
+
+#### Pixel Lab Project (`--no-pixel-lab`)
+
+Included by default. Demonstrates Python, security testing, and statistical analysis skills. Exclude with `--no-pixel-lab` for strict 1-page requirements, pure C/C++ roles, or when the resume already shows sufficient Python coverage.
+
+### Usage Examples
 
 ```bash
-# Security engineer with thesis and soft skills
+# Basic compilation
+./compile-resume.sh --crypto
+./compile-resume.sh --security
+./compile-resume.sh --software
+./compile-resume.sh --applied
+
+# With optional sections
 ./compile-resume.sh --security --thesis --soft-skills
 # Output: resume-security-engineer-thesis-soft.pdf
 
-# Software engineer
-./compile-resume.sh --software
-# Output: resume-software-engineer.pdf
-
-# Applied cryptographer with research-focused sections
 ./compile-resume.sh --applied --thesis --conferences --no-pixel-lab
 # Output: resume-applied-cryptographer-thesis-conf.pdf
 
-# Cryptography engineer forcing Pixel Lab exclusion
 ./compile-resume.sh --crypto --thesis --no-pixel-lab
 # Output: resume-cryptography-engineer-thesis.pdf
-```
 
-### Preview Before Compiling
-
-```bash
-# See what will be generated
+# Preview configuration before compiling
 ./compile-resume.sh --security --thesis --preview
 
-# Output shows:
-# - Role name and configuration
-# - Which sections are included/excluded
-# - Expected output filename
-# - Prompts for confirmation before compiling
-```
-
-### Cleanup
-
-```bash
 # Remove auxiliary LaTeX files
 ./compile-resume.sh --clean
 ```
 
----
-
-## Language Support
-
-### Supported Languages
-
-| Code | Language | Default |
-|------|----------|---------|
-| `en` | English  | ✅ yes  |
-| `es` | Spanish  | no      |
-
-### Usage
-
-```bash
-# Default (English) — no flag needed
-./compile-resume.sh --security
-
-# Explicit English — identical output to above
-./compile-resume.sh --security --lang en
-
-# Spanish
-./compile-resume.sh --security --lang es
-# Output: resume-security-engineer-es.pdf
-
-# Spanish with optional sections
-./compile-resume.sh --applied --thesis --conferences --lang es
-# Output: resume-applied-cryptographer-thesis-conf-es.pdf
-```
-
-### Output Filename Convention
+**Output filename convention:**
 
 ```
 resume-<role>[-<sections>][-<lang>].pdf
 ```
 
-The language suffix is appended only for non-English output:
-- `--lang en` → `resume-security-engineer.pdf` (no suffix)
-- `--lang es` → `resume-security-engineer-es.pdf`
+### Technical Architecture
 
-### Adding a New Language
-
-1. Create `content/<code>.tex` defining **all** macros listed in `content/en.tex`.
-   Every macro name must match exactly — no additions or omissions.
-2. Add the language code to `SUPPORTED_LANGS` in `compile-resume.sh`:
-   ```bash
-   SUPPORTED_LANGS=("en" "es" "de")
-   ```
-3. Compile and verify: `./compile-resume.sh --security --lang de`
-
----
-
-## Technical Architecture
-
-### File Structure
+#### File Structure
 
 ```
 resume-system/
 ├── resume.tex              # Master resume (language-agnostic; macro calls only)
 ├── compile-resume.sh       # Compilation orchestrator
-├── README.md               # This file
 ├── content/
 │   ├── en.tex              # English strings (116 macros)
 │   └── es.tex              # Spanish strings (116 macros)
@@ -289,38 +158,15 @@ resume-system/
     └── resume-applied-cryptographer.pdf
 ```
 
-### How It Works
+#### How It Works
 
-1. **Master Document (`resume.tex`)**
-   - Contains all possible content variants
-   - Uses LaTeX conditionals (`\newif`) for role selection
-   - Defines content variant macros for each section
+1. **`resume.tex`** — contains all content variants using LaTeX conditionals (`\newif`) for role selection
+2. **`compile-resume.sh`** — validates role selection, creates a temporary preamble with flags, concatenates preamble + master document, compiles with `pdflatex`, and cleans auxiliary files
 
-2. **Compilation Script (`compile-resume.sh`)**
-   - Validates role selection (prevents conflicts)
-   - Creates temporary preamble with flags
-   - Concatenates preamble + master document
-   - Compiles with `pdflatex`
-   - Cleans auxiliary files
+#### LaTeX Conditional Flags
 
-3. **Conditional Logic**
-   ```latex
-   % Only shown for cryptography engineer
-   \showcrypto{Content here...}
-   
-   % Only shown for security OR software roles
-   \showsecurityorsoftware{Content here...}
-   
-   % Shown for all engineering roles (excludes applied)
-   \showengineering{Content here...}
-   ```
-
-### LaTeX Conditional Flags
-
-These flags are defined in `compile-resume.sh` and prepended to the document:
-
-| Flag | Role/Section |
-|------|------|
+| Flag | Role / Section |
+|------|----------------|
 | `\ifcryptoengineer` | Cryptography Engineer |
 | `\ifsecurityengineer` | Security Engineer |
 | `\ifsoftwareengineer` | Software Engineer |
@@ -330,16 +176,24 @@ These flags are defined in `compile-resume.sh` and prepended to the document:
 | `\ifincludeedutools` | Educational tools section |
 | `\ifincludeconferences` | Conference presentations section |
 
----
-
-## Customization Guide
-
-### Adding New Content
-
-#### 1. Add Content to `resume.tex`
+#### Conditional Macros in `resume.tex`
 
 ```latex
-% In the appropriate section
+% Only shown for cryptography engineer
+\showcrypto{Content here...}
+
+% Only shown for security OR software roles
+\showsecurityorsoftware{Content here...}
+
+% Shown for all engineering roles (excludes applied)
+\showengineering{Content here...}
+```
+
+### Customization Guide
+
+#### Adding Content to a Role
+
+```latex
 \showcrypto{
     \item New bullet point for cryptography engineer only
 }
@@ -349,193 +203,325 @@ These flags are defined in `compile-resume.sh` and prepended to the document:
 }
 ```
 
-#### 2. Add Role-Agnostic Content
+#### Adding Role-Agnostic Content
 
 ```latex
-% This appears in ALL versions
+% Appears in ALL versions
 \item Universal bullet point for all roles
 ```
 
-#### 3. Add Conditional Sections
+#### Adding a New Role
 
-```latex
-% Define new conditional
-\newif\ifincludemyproject
+1. Add a new conditional in `resume.tex`:
+   ```latex
+   \newif\ifmynewrole
+   \newcommand{\shownewrole}[1]{\ifmynewrole#1\fi}
+   ```
+2. Add the flag handler in `compile-resume.sh`:
+   ```bash
+   --mynewrole)
+       ROLE="mynewrole"
+       ROLE_FLAG="mynewroletrue"
+       ROLE_NAME="My New Role Title"
+       OUTPUT_SUFFIX="my-new-role"
+       ;;
+   ```
+3. Add content variants in `resume.tex` using `\shownewrole{...}`.
 
-% Use it in document
-\ifincludemyproject
-    \subsection{My Project}
-    ...
-\fi
-```
+#### Content Macros
 
-### Adding New Roles
+All content lives in `resume.tex` within these macros:
 
-If you need to add a 5th role variant:
+- `\professionalsummary`
+- `\technicalskills`
+- `\professionalexperience`
+- `\projectsection`
+- `\educationaltoolssection`
+- `\softskillssection`
+- `\conferencesection`
+- `\educationsection`
 
-1. **Edit `resume.tex`** - Add new conditional:
-```latex
-\newif\ifmynewrole
-\newcommand{\shownewrole}[1]{\ifmynewrole#1\fi}
-```
+---
 
-2. **Edit `compile-resume.sh`** - Add new option:
+## Cover Letter System
+
+### Quick Start
+
 ```bash
---mynewrole)
-    ROLE="mynewrole"
-    ROLE_FLAG="mynewroletrue"
-    ROLE_NAME="My New Role Title"
-    OUTPUT_SUFFIX="my-new-role"
-    ;;
+# Make executable (first time only)
+chmod +x compile-cover-letter.sh
+
+# Copy and edit a config template
+cp configs/examples/template-role-specific.json configs/mycompany.json
+$EDITOR configs/mycompany.json
+
+# Compile
+./compile-cover-letter.sh --security --json configs/mycompany.json
+# Output: cover-letter-mycompany-security.pdf
 ```
 
-3. **Add Content Variants** - Update sections in `resume.tex`:
-```latex
-\shownewrole{
-    Content specific to my new role...
+### JSON Configuration
+
+**Required fields:**
+
+```json
+{
+  "company": {
+    "name": "Anthropic",
+    "position": "Security Engineer",
+    "focus_area": "cryptographic safety research"
+  },
+  "job_requirements": {
+    "primary": "post-quantum cryptography",
+    "secondary": "NIST compliance",
+    "tertiary": null
+  },
+  "projects": {
+    "mode": "auto",
+    "add": [],
+    "remove": []
+  },
+  "customization": {
+    "opening_hook": null,
+    "closing_note": null
+  }
 }
 ```
 
-### Modifying Existing Content
+**`projects.mode`**
 
-All content is in `resume.tex` within these macros:
-- `\professionalsummary` - Opening summary paragraph
-- `\technicalskills` - Skills section
-- `\professionalexperience` - Work experience bullets
-- `\projectsection` - Project descriptions
-- `\educationaltoolssection` - Portfolio/demos
-- `\softskillssection` - Professional skills
-- `\conferencesection` - Publications/presentations
-- `\educationsection` - Academic credentials
+| Value | Behaviour |
+|-------|-----------|
+| `auto` | Select top 3 projects by role relevance |
+| `manual` | Use only the `add` list (+ `ntru` default) |
+| `hybrid` | Auto-select, then apply `add`/`remove` |
 
-Edit the macro content directly to update your resume.
+**Project IDs:** `ntru` · `aes` · `pixel-lab` · `thesis` · `educational-tools`
+
+`ntru` is always included by default unless explicitly removed.
+
+### CLI Reference
+
+```bash
+./compile-cover-letter.sh <role> --json <path> [options]
+
+Roles (choose one):  --crypto  --security  --software  --applied  --general
+
+Required:
+  --json <path>           JSON configuration file
+
+Project overrides:
+  --add-project <id>      Add a project (repeatable)
+  --remove-project <id>   Remove a project (repeatable)
+
+Options:
+  --lang <code>           Output language: en (default), es
+  --preview               Show configuration, prompt before compiling
+  --clean                 Remove auxiliary LaTeX files
+  --help                  Show help
+```
+
+### Usage Examples
+
+```bash
+# Security engineer, Stripe
+./compile-cover-letter.sh --security --json configs/examples/security-stripe.json
+
+# Applied cryptographer, preview first
+./compile-cover-letter.sh --applied --json configs/examples/applied-mozilla.json --preview
+
+# Software engineer: add pixel-lab, drop thesis
+./compile-cover-letter.sh --software --json configs/examples/software-vercel.json \
+    --add-project pixel-lab --remove-project thesis
+
+# General application
+./compile-cover-letter.sh --general --json configs/examples/general-janestreet.json
+
+# Crypto engineer, include thesis
+./compile-cover-letter.sh --crypto --json configs/anthropic.json --add-project thesis
+```
+
+**Output filename convention:**
+
+```
+cover-letter-<company-slug>-<role>[-<lang>].pdf
+```
+
+### File Structure
+
+```
+cover-letter/
+├── compile-cover-letter.sh
+├── configs/
+│   ├── examples/
+│   │   ├── crypto-antropic.json
+│   │   └── general-janestreet.json
+│   ├── schema.json
+│   └── templates/
+│       ├── general.json
+│       └── role-specific.json
+├── cover-letter.tex
+└── projects/
+    └── project-definitions.json
+
+content/                        # project root (shared with resume system)
+├── en-cover.tex                # English cover letter macros
+└── es-cover.tex                # Spanish cover letter macros
+```
+
+### Project Relevance Matrix
+
+Higher score = more likely to be auto-selected for that role.
+
+| Project | crypto | security | software | applied | general |
+|---------|--------|----------|----------|---------|---------|
+| ntru | 10 | 9 | 7 | 10 | 8 |
+| aes | 9 | 10 | 8 | 7 | 7 |
+| pixel-lab | 7 | 8 | 9 | 8 | 6 |
+| thesis | 8 | 7 | 5 | 10 | 6 |
+| educational-tools | 5 | 6 | 7 | 6 | 8 |
+
+---
+
+## Language Support
+
+Both systems support the same languages via a `--lang` flag.
+
+### Supported Languages
+
+| Code | Language | Default |
+|------|----------|---------|
+| `en` | English | yes |
+| `es` | Spanish | no |
+
+### Usage
+
+```bash
+# Resume — default English, no flag needed
+./compile-resume.sh --security
+
+# Resume — Spanish
+./compile-resume.sh --security --lang es
+# Output: resume-security-engineer-es.pdf
+
+# Resume — Spanish with optional sections
+./compile-resume.sh --applied --thesis --conferences --lang es
+# Output: resume-applied-cryptographer-thesis-conf-es.pdf
+
+# Cover letter — default English
+./compile-cover-letter.sh --security --json configs/stripe.json
+
+# Cover letter — Spanish
+./compile-cover-letter.sh --security --json configs/stripe.json --lang es
+# Output: cover-letter-stripe-security-es.pdf
+```
+
+The language suffix is appended only for non-English output. Passing `--lang en` produces the same filename as omitting the flag entirely.
+
+### Adding a New Language
+
+**Resume system:**
+
+1. Create `content/<code>.tex` defining all macros present in `content/en.tex`. Every macro name must match exactly — no additions or omissions.
+2. Add the language code to `SUPPORTED_LANGS` in `compile-resume.sh`:
+   ```bash
+   SUPPORTED_LANGS=("en" "es" "de")
+   ```
+3. Compile and verify: `./compile-resume.sh --security --lang de`
+
+**Cover letter system:**
+
+1. Create `content/<code>-cover.tex` at the project root, defining all macros present in `content/en-cover.tex`.
+2. Add the language code to `SUPPORTED_LANGS` in `compile-cover-letter.sh`:
+   ```bash
+   SUPPORTED_LANGS=("en" "es" "de")
+   ```
+3. Compile and verify: `./compile-cover-letter.sh --security --json configs/myco.json --lang de`
 
 ---
 
 ## Troubleshooting
 
-### Compilation Fails
+### Resume
 
-**Problem:** `pdflatex` errors during compilation
+**Compilation fails** — check `resume-[role].log` for LaTeX errors. For interactive debugging: `pdflatex resume.tex`
 
-**Solutions:**
-1. Check the log file: `resume-[role].log`
-2. Look for LaTeX syntax errors
-3. Ensure all required packages are installed
-4. Try manual compilation for debugging:
-   ```bash
-   pdflatex resume.tex
-   ```
-
-### Wrong Content Appears
-
-**Problem:** Seeing content from wrong role
-
-**Solutions:**
-1. Verify only ONE role flag is set in script output
-2. Use `--preview` to check configuration
-3. Clean and recompile:
-   ```bash
-   ./compile-resume.sh --clean
-   ./compile-resume.sh --security --preview
-   ```
-
-### Multiple Roles Specified Error
-
-**Problem:** Script rejects compilation with "Multiple roles specified"
-
-**Solution:** Use exactly one role flag:
+**Wrong content appears** — use `--preview` to inspect the active configuration, then clean and recompile:
 ```bash
-# ❌ WRONG - don't do this
+./compile-resume.sh --clean
+./compile-resume.sh --security --preview
+```
+
+**"Multiple roles specified" error** — exactly one role flag is required:
+```bash
+# Wrong
 ./compile-resume.sh --crypto --security
 
-# ✅ CORRECT
+# Correct
 ./compile-resume.sh --crypto
 ```
+
+### Cover Letter
+
+**Compilation fails** — check `<output-name>.log` for LaTeX errors.
+
+**"No projects selected"** — the remove list eliminated all projects. Add at least one via `--add-project` or shorten the `remove` list in the JSON config.
+
+**"Invalid project ID"** — valid IDs are: `ntru`, `aes`, `pixel-lab`, `thesis`, `educational-tools`.
+
+**JSON parse errors** — common causes: trailing commas, unescaped quotes.
 
 ---
 
 ## Best Practices
 
-### When to Use Each Role
+### Choosing a Role
 
 | Job Posting Signals | Recommended Role |
 |---------------------|------------------|
 | "Cryptography", "post-quantum", "cryptographic protocols" | `--crypto` |
 | "Security engineer", "cryptographic implementations", "NIST compliance" | `--security` |
 | "Software engineer", "backend", "C++", "systems" | `--software` |
-| "Applied cryptographer", "research", "R&D", "cryptographic research" | `--applied` |
+| "Applied cryptographer", "research", "R&D" | `--applied` |
 
 ### Resume Length Guidelines
 
-- **1 page:** Software Engineer (exclude thesis, exclude soft skills)
-- **1.5-2 pages:** Security/Crypto Engineer (include thesis OR soft skills)
-- **2 pages:** Applied Cryptographer (include thesis AND soft skills)
+- **1 page:** `--software` — exclude thesis, exclude soft skills
+- **1.5–2 pages:** `--security` / `--crypto` — include thesis OR soft skills
+- **2 pages:** `--applied` — include thesis AND soft skills
 
-### Testing Your Resume
+### Verifying All Variants
 
-Before sending:
 ```bash
-# Generate all versions
-./compile-resume.sh --crypto > /dev/null
-./compile-resume.sh --security > /dev/null
-./compile-resume.sh --software > /dev/null
-./compile-resume.sh --applied > /dev/null
-
-# Review each PDF
-ls -lh resume-*.pdf
-
-# Pick the best match for the job
+./compile-resume.sh --crypto
+./compile-resume.sh --security
+./compile-resume.sh --software
+./compile-resume.sh --applied
+ls -lh output/resume-*.pdf
 ```
 
 ---
 
 ## FAQ
 
-**Q: Can I use multiple roles at once?**  
-A: No, the system enforces mutual exclusivity. Choose the single best-matching role.
+**Can I use multiple roles at once?**
+No. Both systems enforce mutual exclusivity. Choose the single best-matching role.
 
-**Q: What's the difference between `--crypto` and `--applied`?**  
-A: `--crypto` emphasizes engineering/implementation; `--applied` emphasizes research/theory.
+**What is the difference between `--crypto` and `--applied`?**
+`--crypto` emphasizes engineering and implementation; `--applied` emphasizes research and theory.
 
-**Q: Should I always include soft skills?**  
-A: No - only for senior roles, management positions, or when collaboration is emphasized.
+**Should I always include soft skills?**
+No — only for senior roles, management positions, or when collaboration is explicitly emphasized in the job description.
 
-**Q: How do I add my own projects?**  
-A: Edit the `\projectsection` macro in `resume.tex`, following the existing pattern.
+**How do I add a project to the resume?**
+Edit the `\projectsection` macro in `resume.tex`, following the existing pattern.
 
-**Q: Can I change the order of sections?**  
-A: Yes - reorder the macro calls in the document body at the end of `resume.tex`.
+**Can I change the section order?**
+Yes — reorder the macro calls in the document body at the end of `resume.tex`.
 
----
-
-## Future Enhancements
-
-Potential improvements for future versions:
-
-- [ ] ATS keyword optimization per role
-- [ ] PDF metadata customization
-- [ ] Automated job description analysis
-- [ ] LaTeX template variants (different layouts)
-- [ ] Additional language support (de, fr, ...)
-- [ ] GitHub Actions for automated compilation
+**How do I add a project to a specific cover letter without modifying the JSON?**
+Use `--add-project <id>` on the command line; it takes precedence over the config file.
 
 ---
 
-## Support
-
-For issues or questions:
-- GitHub: [@fer-osorio](https://github.com/fer-osorio)
-- Email: alexis.fernando.osorio.sarabio@gmail.com
-
----
-
-## License
-
-This resume system is provided as-is for personal use.
-
----
-
-**Version:** 3.0
-**Last Updated:** 2026-04-06
-**Author:** Alexis Fernando Osorio Sarabio
+*Resume Compilation System v3.0 · Cover Letter Automation System v2.0 · Last Updated: 2026-04-07 · Author: Alexis Fernando Osorio Sarabio*
