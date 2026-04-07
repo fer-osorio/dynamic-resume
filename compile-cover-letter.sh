@@ -517,7 +517,7 @@ PYEOF
     CL_PROJECT_DB="$PROJECT_DB" \
     CL_CONFIG="$JSON_CONFIG" \
     CL_SELECTED="$selected_str" \
-    CL_CONTENT_FILE="${SCRIPT_DIR}/../content/${LANG}-cover.tex" \
+    CL_CONTENT_FILE="${SCRIPT_DIR}/content/${LANG}-cover.tex" \
     python3 "$py_script"
     local exit_code=$?
 
@@ -713,7 +713,7 @@ OUTPUT_FILE=$(build_output_filename)
 print_info "Compiling: ${BOLD}${ROLE_NAME}${NC} → ${OUTPUT_FILE}"
 echo ""
 
-CONTENT_FILE="${SCRIPT_DIR}/../content/${LANG}-cover.tex"
+CONTENT_FILE="${SCRIPT_DIR}/content/${LANG}-cover.tex"
 if [ ! -f "$CONTENT_FILE" ]; then
     print_error "Content file not found: content/${LANG}-cover.tex"
     echo ""
