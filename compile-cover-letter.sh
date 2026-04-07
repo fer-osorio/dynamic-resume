@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =============================================================================
-# Cover Letter Compiler v1.0
+# Cover Letter Compiler v2.0
 # =============================================================================
 # Generates role-specific cover letters in PDF format.
 # Architecture mirrors compile-resume.sh v2.0.
@@ -28,6 +28,8 @@ ROLE_NAME=""
 JSON_CONFIG=""
 PREVIEW_MODE=false
 CLEAN_ONLY=false
+LANG="en"
+SUPPORTED_LANGS=("en" "es")
 
 # Project overrides (space-separated project IDs)
 ADD_PROJECTS=()
@@ -50,7 +52,7 @@ VALID_PROJECT_IDS=("ntru" "aes" "pixel-lab" "thesis" "educational-tools")
 
 print_header() {
     echo -e "${CYAN}════════════════════════════════════════${NC}"
-    echo -e "${BOLD}  Cover Letter Compiler v1.0${NC}"
+    echo -e "${BOLD}  Cover Letter Compiler v2.0${NC}"
     echo -e "${CYAN}════════════════════════════════════════${NC}"
     echo ""
 }
@@ -72,6 +74,18 @@ validate_role() {
         echo "Run './compile-cover-letter.sh --help' for usage."
         exit 1
     fi
+}
+
+validate_lang() {
+    for l in "${SUPPORTED_LANGS[@]}"; do
+        [ "$LANG" = "$l" ] && return 0
+    done
+    print_error "Unsupported language: '${LANG}'"
+    echo ""
+    echo "  Supported languages: $(IFS=' | '; echo "${SUPPORTED_LANGS[*]}")"
+    echo ""
+    echo "  Run './compile-cover-letter.sh --help' for usage information."
+    exit 1
 }
 
 validate_json_arg() {
@@ -344,7 +358,11 @@ build_output_filename() {
     # Slugify: lowercase, spaces→hyphens, strip non-alphanum/hyphen
     local slug
     slug=$(echo "$company" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/[^a-z0-9-]//g' | cut -c1-30)
-    echo "cover-letter-${slug}-${ROLE}.pdf"
+    if [ "$LANG" != "en" ]; then
+        echo "cover-letter-${slug}-${ROLE}-${LANG}.pdf"
+    else
+        echo "cover-letter-${slug}-${ROLE}.pdf"
+    fi
 }
 
 # =============================================================================
@@ -478,7 +496,10 @@ if marker not in content:
     print(f"ERROR: marker '{marker}' not found in template", file=sys.stderr)
     sys.exit(1)
 
-content = content.replace(marker, "\n".join(lines), 1)
+CONTENT_FILE = os.environ["CL_CONTENT_FILE"]
+with open(CONTENT_FILE) as f:
+    content_data = f.read()
+content = content.replace(marker, "\n".join(lines) + "\n" + content_data, 1)
 
 with open("temp_cover_letter.tex", "w") as f:
     f.write(content)
@@ -496,6 +517,7 @@ PYEOF
     CL_PROJECT_DB="$PROJECT_DB" \
     CL_CONFIG="$JSON_CONFIG" \
     CL_SELECTED="$selected_str" \
+    CL_CONTENT_FILE="${SCRIPT_DIR}/content/${LANG}-cover.tex" \
     python3 "$py_script"
     local exit_code=$?
 
@@ -523,6 +545,7 @@ show_preview() {
     echo -e "${CYAN}════════════════════════════════════════${NC}"
     echo ""
     echo -e "${BOLD}Role:${NC}             ${ROLE_NAME}"
+    echo -e "${BOLD}Language:${NC}         ${LANG}"
     echo -e "${BOLD}Company:${NC}          ${company}"
     [ -n "$position" ] && echo -e "${BOLD}Position:${NC}         ${position}"
     echo -e "${BOLD}Primary Req:${NC}      ${primary}"
@@ -578,6 +601,7 @@ show_help() {
     echo ""
     echo -e "${BOLD}OPTIONS:${NC}"
     echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
+    echo -e "  ${CYAN}--lang <code>${NC}         Output language: en (default), es"
     echo -e "  ${CYAN}--clean${NC}               Remove auxiliary LaTeX files"
     echo -e "  ${CYAN}--help${NC}                Show this message"
     echo ""
@@ -637,6 +661,10 @@ while [ $# -gt 0 ]; do
             shift
             [ -z "$1" ] && { print_error "--remove-project requires a project ID."; exit 1; }
             REMOVE_PROJECTS+=("$1") ;;
+        --lang)
+            shift
+            [ -z "$1" ] && { print_error "--lang requires a language code (e.g. en, es)"; exit 1; }
+            LANG="$1" ;;
         --preview)
             PREVIEW_MODE=true ;;
         --clean)
@@ -663,6 +691,7 @@ if [ "$CLEAN_ONLY" = true ]; then
 fi
 
 validate_role
+validate_lang
 validate_json_arg
 check_dependencies
 load_and_validate_json "$JSON_CONFIG"
@@ -683,6 +712,14 @@ OUTPUT_FILE=$(build_output_filename)
 
 print_info "Compiling: ${BOLD}${ROLE_NAME}${NC} → ${OUTPUT_FILE}"
 echo ""
+
+CONTENT_FILE="${SCRIPT_DIR}/content/${LANG}-cover.tex"
+if [ ! -f "$CONTENT_FILE" ]; then
+    print_error "Content file not found: content/${LANG}-cover.tex"
+    echo ""
+    echo "  Expected: ${CONTENT_FILE}"
+    exit 1
+fi
 
 generate_temp_latex "${OUTPUT_FILE%.pdf}"
 

@@ -1,0 +1,179 @@
+% =============================================================================
+% Spanish cover letter content definitions — content/es-cover.tex
+% =============================================================================
+% Defines all user-visible strings for the Spanish cover letter variant.
+% Every macro name must match content/en-cover.tex exactly.
+% =============================================================================
+
+% Document language (consumed by \usepackage[\documentlanguage]{babel})
+\newcommand{\documentlanguage}{spanish}
+
+% =============================================================================
+% Role title subtitles (header and footer)
+% =============================================================================
+\newcommand{\roleTitleCrypto}{Ingeniero en Criptografía}
+\newcommand{\roleTitleSecurity}{Ingeniero de Seguridad}
+\newcommand{\roleTitleSoftware}{Ingeniero de Software}
+\newcommand{\roleTitleApplied}{Criptógrafo Aplicado}
+\newcommand{\roleTitleGeneral}{Científico Computacional y Matemático}
+
+% =============================================================================
+% Salutation, sign-off, and recipient block labels
+% =============================================================================
+\newcommand{\salutation}{Estimado equipo de \textbf{\CompanyName},}
+\newcommand{\signOff}{Atentamente,}
+\newcommand{\talentTeam}{Equipo de Adquisición de Talento}
+\newcommand{\hiringTeamLabel}{Equipo de Contratación}
+
+% =============================================================================
+% Opening paragraph body — per-role variants
+% =============================================================================
+\newcommand{\openingBodyCrypto}{%
+    \ifx\OpeningHook\empty
+        Como especialista en criptografía con amplia experiencia en sistemas post-cuánticos
+        e implementaciones de nivel productivo, me sentí inmediatamente atraído por \textbf{\CompanyName}.%
+    \else
+        \OpeningHook%
+    \fi{}
+    \ifx\FocusArea\empty\else
+        \ Su trabajo en \textbf{\FocusArea} se alinea directamente con mi experiencia en
+        investigación e ingeniería.%
+    \fi{}
+    \ Durante los últimos dos años he diseñado y optimizado protocolos criptográficos
+    conformes a NIST---incluyendo encapsulamiento de claves post-cuántico basado en NTRU
+    y bibliotecas de cifrado AES---logrando mejoras de rendimiento medibles mientras
+    se mantienen propiedades de seguridad rigurosas.
+    \ifx\PositionTitle\empty\else
+        \ El rol de \textbf{\PositionTitle} representa exactamente el tipo de desafío
+        que busco asumir a continuación.%
+    \fi%
+}
+
+\newcommand{\openingBodySecurity}{%
+    \ifx\OpeningHook\empty
+        Como ingeniero de seguridad especializado en implementaciones criptográficas, me atrajo
+        \textbf{\CompanyName} y su compromiso con la construcción de infraestructura de seguridad
+        resiliente y conforme a estándares.%
+    \else
+        \OpeningHook%
+    \fi{}
+    \ifx\FocusArea\empty\else
+        \ Su enfoque en \textbf{\FocusArea} se corresponde directamente con mi experiencia práctica.%
+    \fi{}
+    \ He construido sistemas criptográficos de nivel productivo desde cero---implementando
+    bibliotecas AES validadas por NIST, protocolos de intercambio de claves post-cuánticos
+    y marcos integrales de pruebas de seguridad---siempre con énfasis en la correctitud,
+    el cumplimiento normativo y las garantías de seguridad medibles.
+    \ifx\PositionTitle\empty\else
+        \ Considero que la vacante de \textbf{\PositionTitle} representa una excelente
+        compatibilidad mutua.%
+    \fi%
+}
+
+\newcommand{\openingBodySoftware}{%
+    \ifx\OpeningHook\empty
+        Soy ingeniero de software con especialización en seguridad y criptografía,
+        y la cultura de ingeniería de \textbf{\CompanyName} captó mi atención de inmediato.%
+    \else
+        \OpeningHook%
+    \fi{}
+    \ifx\FocusArea\empty\else
+        \ Su énfasis en \textbf{\FocusArea} resuena con el tipo de problemas que
+        más disfruto resolver.%
+    \fi{}
+    \ Mi trabajo se centra en sistemas C/C++ de alto rendimiento con fundamentos
+    criptográficos robustos---arquitectura limpia, pruebas exhaustivas y código duradero.
+    He logrado una mejora de 20$\times$ en el throughput de un criptosistema post-cuántico
+    y una ganancia de rendimiento de $2\times$ en una biblioteca AES, ambas mediante
+    análisis algorítmico cuidadoso y no a través de optimización prematura.
+    \ifx\PositionTitle\empty\else
+        \ Estoy entusiasmado con la posición de \textbf{\PositionTitle} y los desafíos
+        técnicos que conlleva.%
+    \fi%
+}
+
+\newcommand{\openingBodyApplied}{%
+    \ifx\OpeningHook\empty
+        Como criptógrafo aplicado que conecta la investigación teórica con software de
+        calidad productiva, me sentí impulsado a comunicarme con \textbf{\CompanyName}.%
+    \else
+        \OpeningHook%
+    \fi{}
+    \ifx\FocusArea\empty\else
+        \ Su trabajo en \textbf{\FocusArea} se sitúa precisamente en la intersección
+        entre la teoría y la práctica que más me apasiona.%
+    \fi{}
+    \ Mi investigación de maestría sobre protocolos de comunicación segura post-cuánticos
+    produjo tanto contribuciones revisadas por pares como implementaciones funcionales en C++;
+    no encuentro valor en la teoría que no puede desplegarse, ni en el código que carece
+    de fundamentos formales.
+    \ifx\PositionTitle\empty\else
+        \ El rol de \textbf{\PositionTitle} parece el lugar ideal para esa filosofía.%
+    \fi%
+}
+
+\newcommand{\openingBodyGeneral}{%
+    \ifx\OpeningHook\empty
+        Soy un científico computacional y matemático al que le gusta resolver problemas
+        complejos con elegancia---por lo que, para sorpresa de nadie, cuando conocí
+        \textbf{\CompanyName} me sentí impulsado a comunicarme.%
+    \else
+        \OpeningHook%
+    \fi{}
+    \ifx\FocusArea\empty\else
+        \ Su trabajo en \textbf{\FocusArea} es exactamente el tipo de desafío
+        que estoy buscando.%
+    \fi{}
+    \ Mi experiencia abarca criptografía post-cuántica, cifrado simétrico, análisis
+    estadístico de seguridad y desarrollo web---me energizo más cuando puedo aportar
+    rigor matemático a problemas de ingeniería que realmente importan.%
+}
+
+% =============================================================================
+% Requirements paragraph body
+% =============================================================================
+\newcommand{\requirementsTemplate}{%
+    La posición enfatiza
+    \ifx\PrimaryReq\empty
+        excelencia técnica y experiencia en seguridad%
+    \else
+        \textbf{\PrimaryReq}%
+    \fi%
+    \ifx\SecondaryReq\empty\else
+        \ y \textbf{\SecondaryReq}%
+    \fi%
+    \ifx\TertiaryReq\empty\else
+        \ así como \textbf{\TertiaryReq}%
+    \fi%
+    . Mi trabajo en proyectos proporciona evidencia directa de estas capacidades:%
+}
+
+% =============================================================================
+% Closing statement body — per-role variants
+% =============================================================================
+\newcommand{\closingBodyEngineering}{%
+    Me comunico porque mi filosofía de trabajo resuena con lo que representan los grandes
+    equipos de ingeniería: pensamiento riguroso, ejecución limpia y un compromiso genuino
+    con construir cosas que funcionen bien y perduren. Estoy seguro de que puedo contribuir
+    de manera significativa a los objetivos de \textbf{\CompanyName} desde el primer día.%
+}
+
+\newcommand{\closingBodyApplied}{%
+    Me comunico porque creo que la mejor criptografía aplicada ocurre cuando los teóricos
+    y los ingenieros trabajan en la misma sala---o son la misma persona. Agradecería la
+    oportunidad de aportar esa perspectiva al equipo de \textbf{\CompanyName}.%
+}
+
+\newcommand{\closingBodyGeneral}{%
+    Me comunico porque mi filosofía de trabajo y mis valores resuenan con lo que
+    \textbf{\CompanyName} representa. Me esfuerzo por ver los problemas tal como son,
+    y aún más por resolverlos con elegancia---y sé que rindo mejor junto a personas
+    que se exigen a sí mismas el mismo estándar.%
+}
+
+\newcommand{\closingLine}{%
+    Mi CV proporciona más detalles sobre mis calificaciones técnicas y experiencia en
+    proyectos. Espero que me permitan la oportunidad de demostrar cómo mis habilidades
+    y ética de trabajo pueden contribuir al éxito de su equipo.
+    Agradezco su consideración.%
+}

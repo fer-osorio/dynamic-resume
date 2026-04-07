@@ -1,0 +1,207 @@
+\documentclass[11pt,a4paper]{article}
+
+% =============================================================================
+% COVER LETTER TEMPLATE v1.0
+% =============================================================================
+% Conditional flags and content macros are prepended by compile-cover-letter.sh.
+%
+% Available flags (role — mutually exclusive):
+%   \ifcryptoengineer, \ifsecurityengineer, \ifsoftwareengineer,
+%   \ifappliedcrypto, \ifgeneralapplication
+%
+% Available flags (projects — 1-3 slots):
+%   \ifprojectone, \ifprojecttwo, \ifprojectthree
+%
+% Available macros (injected from JSON config):
+%   \CompanyName, \PositionTitle, \FocusArea
+%   \PrimaryReq, \SecondaryReq, \TertiaryReq
+%   \OpeningHook, \ClosingNote
+%   \ProjectNameN, \ProjectURLN, \ProjectDescN  (N = 1,2,3)
+% =============================================================================
+
+% GENERATED_FLAGS_AND_MACROS_HERE
+
+% =============================================================================
+% CONDITIONAL DISPLAY HELPERS
+% =============================================================================
+
+\newcommand{\showcrypto}[1]{\ifcryptoengineer#1\fi}
+\newcommand{\showsecurity}[1]{\ifsecurityengineer#1\fi}
+\newcommand{\showsoftware}[1]{\ifsoftwareengineer#1\fi}
+\newcommand{\showapplied}[1]{\ifappliedcrypto#1\fi}
+\newcommand{\showgeneral}[1]{\ifgeneralapplication#1\fi}
+
+% OR-logic helpers
+\newcommand{\showcryptoorsecurity}[1]{\ifcryptoengineer#1\else\ifsecurityengineer#1\fi\fi}
+\newcommand{\showcryptoorapplied}[1]{\ifcryptoengineer#1\else\ifappliedcrypto#1\fi\fi}
+\newcommand{\showengineering}[1]{\ifcryptoengineer#1\else\ifsecurityengineer#1\else\ifsoftwareengineer#1\fi\fi\fi}
+\newcommand{\shownotgeneral}[1]{\ifgeneralapplication\else#1\fi}
+
+% =============================================================================
+% PACKAGES
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[\documentlanguage]{babel}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage[expansion=false]{microtype}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Cover Letter -- Alexis Fernando Osorio Sarabio},
+    pdfauthor={Alexis Fernando Osorio Sarabio}
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+% =============================================================================
+% OPENING PARAGRAPH
+% =============================================================================
+% Each variant: identity + value proposition + company connection + specific interest
+% \OpeningHook (if non-empty) replaces the first sentence with a custom hook.
+
+\newcommand{\openingparagraph}{%
+    \showcrypto{\openingBodyCrypto}
+    \showsecurity{\openingBodySecurity}
+    \showsoftware{\openingBodySoftware}
+    \showapplied{\openingBodyApplied}
+    \showgeneral{\openingBodyGeneral}
+}
+
+% =============================================================================
+% REQUIREMENTS PARAGRAPH
+% =============================================================================
+
+\newcommand{\requirementsparagraph}{\requirementsTemplate}
+
+% =============================================================================
+% PROJECT DESCRIPTIONS
+% =============================================================================
+
+\newcommand{\projectdescriptions}{%
+    \begin{itemize}
+        \setlength{\itemsep}{4pt}
+
+        \ifprojectone
+            \item \textbf{\ProjectNameOne}
+                \ (\href{\ProjectURLOne}{\texttt{GitHub}}):\\
+                \ProjectDescOne
+        \fi
+
+        \ifprojecttwo
+            \item \textbf{\ProjectNameTwo}
+                \ (\href{\ProjectURLTwo}{\texttt{GitHub}}):\\
+                \ProjectDescTwo
+        \fi
+
+        \ifprojectthree
+            \item \textbf{\ProjectNameThree}
+                \ (\href{\ProjectURLThree}{\texttt{GitHub}}):\\
+                \ProjectDescThree
+        \fi
+    \end{itemize}%
+}
+
+% =============================================================================
+% CLOSING PARAGRAPH
+% =============================================================================
+
+\newcommand{\closingstatement}{%
+    \showengineering{\closingBodyEngineering}
+    \showapplied{\closingBodyApplied}
+    \showgeneral{\closingBodyGeneral}
+
+    \ifx\ClosingNote\empty\else
+        \par\ClosingNote%
+    \fi
+
+    \par
+    \closingLine%
+}
+
+% =============================================================================
+% DOCUMENT BODY
+% =============================================================================
+
+\begin{document}
+
+% --- Header ---
+\begin{center}
+    {\LARGE \textbf{Alexis Fernando Osorio Sarabio}}\\[4pt]
+    \showcrypto{\large\textit{\roleTitleCrypto}}
+    \showsecurity{\large\textit{\roleTitleSecurity}}
+    \showsoftware{\large\textit{\roleTitleSoftware}}
+    \showapplied{\large\textit{\roleTitleApplied}}
+    \showgeneral{\large\textit{\roleTitleGeneral}}
+
+    \vspace{6pt}
+
+    \normalsize
+    Mexico City, Mexico\quad$|$\quad+52 95 4128 6658\\
+    \href{mailto:alexis.fernando.osorio.sarabio@gmail.com}{alexis.fernando.osorio.sarabio@gmail.com}\quad$|$\quad
+    \href{https://fer-osorio.github.io/mathematical-foundations}{Portfolio}\quad$|$\quad
+    \href{https://github.com/fer-osorio}{GitHub}\quad$|$\quad
+    \href{https://www.linkedin.com/in/alexis-fernando-osorio-sarabio-0b755b346}{LinkedIn}
+\end{center}
+
+\vspace{10pt}
+\hrule
+\vspace{14pt}
+
+% --- Date and Recipient ---
+\today
+
+\vspace{8pt}
+
+\textbf{\CompanyName}%
+\ifx\PositionTitle\empty
+    \\\talentTeam%
+\else
+    \\\hiringTeamLabel{} --- \textbf{\PositionTitle}%
+\fi
+
+\vspace{8pt}
+
+\salutation
+
+\vspace{4pt}
+
+% --- Opening ---
+\openingparagraph
+
+% --- Requirements & Projects ---
+\requirementsparagraph
+
+\projectdescriptions
+
+% --- Closing ---
+\closingstatement
+
+\vspace{18pt}
+
+\signOff
+
+\vspace{12pt}
+
+\textbf{Alexis Fernando Osorio Sarabio}
+
+% --- Footer ---
+\vfill
+\begin{center}
+    \scriptsize
+    \showcrypto{\textbf{\roleTitleCrypto}}
+    \showsecurity{\textbf{\roleTitleSecurity}}
+    \showsoftware{\textbf{\roleTitleSoftware}}
+    \showapplied{\textbf{\roleTitleApplied}}
+    \showgeneral{\textbf{\roleTitleGeneral}}
+    \ $\bullet$ \textbf{\CompanyName} $\bullet$ Generated \today
+\end{center}
+
+\end{document}
