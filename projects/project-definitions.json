@@ -96,7 +96,7 @@
       "id": "educational-tools",
       "name": "Mathematical Foundations Website",
       "technologies": ["HTML", "CSS", "JavaScript", "Web Cryptography"],
-      "url": "https://fer-osorio.github.io/mathematical-foundations",
+      "url": "https://fer-osorio.github.io/security-portfolio",
       "short_description": "Interactive cryptographic demonstrations: RSA, ECC, hash functions, and key exchange protocols",
       "relevance": {
         "crypto": 5,
