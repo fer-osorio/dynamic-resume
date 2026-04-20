@@ -54,7 +54,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["ntru", "aes", "pixel-lab", "thesis", "educational-tools"]
+            "enum": ["ntru", "aes", "pixel-lab", "thesis", "security-portfolio"]
           },
           "description": "Projects to add"
         },
@@ -62,7 +62,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["ntru", "aes", "pixel-lab", "thesis", "educational-tools"]
+            "enum": ["ntru", "aes", "pixel-lab", "thesis", "security-portfolio"]
           },
           "description": "Projects to remove"
         }

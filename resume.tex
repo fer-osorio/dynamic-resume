@@ -14,7 +14,7 @@
 % Optional Sections:
 %   - Thesis work
 %   - Soft skills
-%   - Educational tools
+%   - Security portfolio
 % =============================================================================
 
 % Note: Conditional flags are defined in the compile-resume.sh script
@@ -25,7 +25,7 @@
 %     \ifcryptoengineer, \ifsecurityengineer, \ifsoftwareengineer, \ifappliedcrypto
 %
 %   Optional section flags:
-%     \ifincludethesis, \ifincludesoftskills, \ifincludeedutools, \ifincludeconferences, \ifincludepixellab
+%     \ifincludethesis, \ifincludesoftskills, \ifincludesecportfolio, \ifincludeconferences, \ifincludepixellab
 
 % =============================================================================
 % CONDITIONAL DISPLAY HELPERS
@@ -495,26 +495,26 @@
 }
 
 % =============================================================================
-% EDUCATIONAL TOOLS SECTION
+% SECURITY PORTFOLIO SECTION
 % =============================================================================
 % Conditional - shows interactive demos and public portfolio
 % =============================================================================
 
-\newcommand{\educationaltoolssection}{%
-	\ifincludeedutools
-	\section{\secEducationalTools}
+\newcommand{\secportfoliosection}{%
+	\ifincludesecportfolio
+	\section{\secSecPortfolio}
 
-	\subsection{\subEduTools}
+	\subsection{\subSecPortfolio}
 	\textit{
-	    \dateEduTools \\
+	    \dateSecPortfolio \\
 	    \hspace*{0.3pt} URL: \href{https://fer-osorio.github.io/security-portfolio}{fer-osorio.github.io/security-portfolio}
 	}
 	\begin{itemize}
-	    \item \edutoolsPlatformDesc
+	    \item \secportfolioPlatformDesc
 
-	    \item \edutoolsDemoIntro
+	    \item \secportfolioDemoIntro
 	        \begin{itemize}
-	            \edutoolsDemoList
+	            \secportfolioDemoList
 	        \end{itemize}
 	\end{itemize}
 	\fi
@@ -609,7 +609,7 @@
 \technicalskills
 \professionalexperience
 \projectsection
-\educationaltoolssection
+\secportfoliosection
 \softskillssection
 \conferencesection
 \educationsection

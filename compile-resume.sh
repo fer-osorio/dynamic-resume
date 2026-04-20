@@ -27,7 +27,7 @@ OUTPUT_SUFFIX=""
 INCLUDE_SOFT_SKILLS=false # Default OFF (more management-oriented)
 INCLUDE_PIXEL_LAB=true    # Default ON
 INCLUDE_THESIS=false      # Default OFF (more research-oriented)
-INCLUDE_EDU_TOOLS=true    # Default ON
+INCLUDE_SEC_PORTFOLIO=true    # Default ON
 INCLUDE_CONFERENCES=false # Default OFF (more research-oriented)
 
 LANG="en"
@@ -79,7 +79,7 @@ show_help() {
     echo -e "  ${CYAN}--soft-skills${NC}         Include professional/soft skills section"
     echo -e "  ${CYAN}--conferences${NC}         Include conference presentations section"
     echo -e "  ${CYAN}--no-pixel-lab${NC}        Exclude Pixel Lab project (included by default)"
-    echo -e "  ${CYAN}--no-edu-tools${NC}        Exclude educational tools section (included by default)"
+    echo -e "  ${CYAN}--no-sec-portfolio${NC}    Exclude security portfolio section (included by default)"
     echo -e "  ${CYAN}--lang <code>${NC}         Output language: en (default), es"
     echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
     echo -e "  ${CYAN}--clean${NC}               Clean auxiliary files and exit"
@@ -198,10 +198,10 @@ show_preview() {
         echo -e "  Pixel Lab:      ${YELLOW}✗ EXCLUDED${NC}"
     fi
 
-    if [ "$INCLUDE_EDU_TOOLS" = true ]; then
-        echo -e "  Edu Tools:      ${GREEN}✓ INCLUDED${NC} (default)"
+    if [ "$INCLUDE_SEC_PORTFOLIO" = true ]; then
+        echo -e "  Sec Portfolio:  ${GREEN}✓ INCLUDED${NC} (default)"
     else
-        echo -e "  Edu Tools:      ${YELLOW}✗ EXCLUDED${NC}"
+        echo -e "  Sec Portfolio:  ${YELLOW}✗ EXCLUDED${NC}"
     fi
 
     echo ""
@@ -275,8 +275,8 @@ while [ $# -gt 0 ]; do
         --no-pixel-lab)
             INCLUDE_PIXEL_LAB=false
             ;;
-        --no-edu-tools)
-            INCLUDE_EDU_TOOLS=false
+        --no-sec-portfolio)
+            INCLUDE_SEC_PORTFOLIO=false
             ;;
         --lang)
             shift
@@ -362,7 +362,7 @@ cat > temp_resume.tex << 'PREAMBLE_END'
 \newif\ifappliedcrypto
 \newif\ifincludethesis
 \newif\ifincludesoftskills
-\newif\ifincludeedutools
+\newif\ifincludesecportfolio
 \newif\ifincludeconferences
 \newif\ifincludepixellab
 
@@ -390,10 +390,10 @@ else
     echo "\\includesoftskillsfalse" >> temp_resume.tex
 fi
 
-if [ "$INCLUDE_EDU_TOOLS" = true ]; then
-    echo "\\includeedutoolstrue" >> temp_resume.tex
+if [ "$INCLUDE_SEC_PORTFOLIO" = true ]; then
+    echo "\\includesecportfoliotrue" >> temp_resume.tex
 else
-    echo "\\includeedutoolsfalse" >> temp_resume.tex
+    echo "\\includesecportfoliofalse" >> temp_resume.tex
 fi
 
 if [ "$INCLUDE_CONFERENCES" = true ]; then
