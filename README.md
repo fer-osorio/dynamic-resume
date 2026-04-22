@@ -100,9 +100,9 @@ Include for senior or team lead positions, roles emphasizing collaboration or st
 
 Include when applying to research-oriented roles or positions that value thought leadership, publications, or technical evangelism. Exclude for pure engineering/implementation roles or when space is limited. Default: excluded.
 
-#### Educational Tools (`--no-edu-tools`)
+#### Security Portfolio (`--no-sec-portfolio`)
 
-Included by default. Showcases web development, open-source contributions, and ability to simplify complex concepts. Exclude with `--no-edu-tools` for space-constrained or pure backend/systems roles with no frontend component.
+Included by default. Showcases web development, open-source contributions, and interactive cryptographic demonstrations. Exclude with `--no-sec-portfolio` for space-constrained or pure backend/systems roles with no frontend component.
 
 #### Pixel Lab Project (`--no-pixel-lab`)
 
@@ -173,7 +173,7 @@ resume-system/
 | `\ifappliedcrypto` | Applied Cryptographer |
 | `\ifincludethesis` | Thesis section |
 | `\ifincludesoftskills` | Soft skills section |
-| `\ifincludeedutools` | Educational tools section |
+| `\ifincludesecportfolio` | Security portfolio section |
 | `\ifincludeconferences` | Conference presentations section |
 
 #### Conditional Macros in `resume.tex`
@@ -236,7 +236,7 @@ All content lives in `resume.tex` within these macros:
 - `\technicalskills`
 - `\professionalexperience`
 - `\projectsection`
-- `\educationaltoolssection`
+- `\secportfoliosection`
 - `\softskillssection`
 - `\conferencesection`
 - `\educationsection`
@@ -296,7 +296,7 @@ $EDITOR configs/mycompany.json
 | `manual` | Use only the `add` list (+ `ntru` default) |
 | `hybrid` | Auto-select, then apply `add`/`remove` |
 
-**Project IDs:** `ntru` · `aes` · `pixel-lab` · `thesis` · `educational-tools`
+**Project IDs:** `ntru` · `aes` · `pixel-lab` · `thesis` · `security-portfolio`
 
 `ntru` is always included by default unless explicitly removed.
 
@@ -379,7 +379,7 @@ Higher score = more likely to be auto-selected for that role.
 | aes | 9 | 10 | 8 | 7 | 7 |
 | pixel-lab | 7 | 8 | 9 | 8 | 6 |
 | thesis | 8 | 7 | 5 | 10 | 6 |
-| educational-tools | 5 | 6 | 7 | 6 | 8 |
+| security-portfolio | 5 | 6 | 7 | 6 | 8 |
 
 ---
 
@@ -467,7 +467,7 @@ The language suffix is appended only for non-English output. Passing `--lang en`
 
 **"No projects selected"** — the remove list eliminated all projects. Add at least one via `--add-project` or shorten the `remove` list in the JSON config.
 
-**"Invalid project ID"** — valid IDs are: `ntru`, `aes`, `pixel-lab`, `thesis`, `educational-tools`.
+**"Invalid project ID"** — valid IDs are: `ntru`, `aes`, `pixel-lab`, `thesis`, `security-portfolio`.
 
 **JSON parse errors** — common causes: trailing commas, unescaped quotes.
 

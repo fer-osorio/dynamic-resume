@@ -93,7 +93,7 @@
       "default": false
     },
     {
-      "id": "educational-tools",
+      "id": "security-portfolio",
       "name": "Security Portfolio Website",
       "technologies": ["HTML", "CSS", "JavaScript", "Web Cryptography"],
       "url": "https://fer-osorio.github.io/security-portfolio",

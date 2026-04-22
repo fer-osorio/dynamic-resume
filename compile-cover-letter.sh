@@ -44,7 +44,7 @@ PROJECT_DB="${SCRIPT_DIR}/projects/project-definitions.json"
 TEMPLATE="${SCRIPT_DIR}/cover-letter.tex"
 
 # Valid project IDs
-VALID_PROJECT_IDS=("ntru" "aes" "pixel-lab" "thesis" "educational-tools")
+VALID_PROJECT_IDS=("ntru" "aes" "pixel-lab" "thesis" "security-portfolio")
 
 # =============================================================================
 # Helper Functions
@@ -277,7 +277,7 @@ for p in d.get('projects', {}).get('remove', []):
         if ! is_valid_project_id "$pid"; then
             print_error "Invalid project ID: '$pid'"
             echo ""
-            echo "Valid IDs: ntru | aes | pixel-lab | thesis | educational-tools"
+            echo "Valid IDs: ntru | aes | pixel-lab | thesis | security-portfolio"
             exit 1
         fi
     done
@@ -597,7 +597,7 @@ show_help() {
     echo -e "${BOLD}PROJECT OVERRIDES:${NC}"
     echo -e "  ${CYAN}--add-project <id>${NC}    Add a project (repeatable)"
     echo -e "  ${CYAN}--remove-project <id>${NC} Remove a project (repeatable)"
-    echo -e "  Valid IDs: ntru | aes | pixel-lab | thesis | educational-tools"
+    echo -e "  Valid IDs: ntru | aes | pixel-lab | thesis | security-portfolio"
     echo ""
     echo -e "${BOLD}OPTIONS:${NC}"
     echo -e "  ${CYAN}--preview${NC}             Show configuration without compiling"
